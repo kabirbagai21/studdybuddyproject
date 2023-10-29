@@ -7,11 +7,11 @@
 </div>
 
 <% if @enrolled_courses.present? %>
-  <% @enrolled_courses.each do |course| %>
-    <div>
-      <%= course.name %> 
-    </div>
-  <% end %>
+    <% @enrolled_courses.each do |course| %>
+        <div>
+          <%= link_to course.name, course %>
+        </div>
+    <% end %>
 <% else %>
   <p>No enrolled courses</p>
 <% end %>

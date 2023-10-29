@@ -1,0 +1,9 @@
+<h1><%= @course.name %></h1>
+
+
+<h2>Enrolled Students:</h2>
+<% @enrolled_students.each do |student| %>
+  <div>
+    <%= link_to student.name, student %>
+  </div>
+<% end %>

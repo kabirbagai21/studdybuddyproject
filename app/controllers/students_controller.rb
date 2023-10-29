@@ -27,7 +27,6 @@ class StudentsController < ApplicationController
     if course
       unless student.courses.include?(course)
         student.courses << course
-        course.students << student
         redirect_to student_path(student), notice: 'Successfully enrolled in the course.'
       end 
     else
