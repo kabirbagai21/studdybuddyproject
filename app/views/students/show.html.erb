@@ -1,0 +1,7 @@
+<h1><%= @student.name %></h1>
+<h2><%= @student.email %></h2>
+<p><%= @student.bio %></p>
+
+<div class="row">
+  <%= link_to 'Edit', edit_student_path(@student), :class => 'btn btn-primary col-2' %>
+</div>
