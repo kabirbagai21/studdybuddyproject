@@ -22,3 +22,12 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+### Rspec Tests
+
+The rspec test files are located in `spec` folder.
+To run rspec tests, just do the following:
+ ```
+ bundle exec rspec spec
+ ```

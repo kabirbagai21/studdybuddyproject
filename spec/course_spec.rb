@@ -1,31 +1,32 @@
 require_relative '../app/models/course.rb'
 
-RSpec.describe Course, type: :model do
-  let(:course) { Course.new(name: "Introduction to Rails") }
-
-  describe "associations" do
-    it "has many enrollments" do
-      expect(course).to have_many(:enrollments)
-    end
-
-    it "has many students through enrollments" do
-      expect(course).to have_many(:students).through(:enrollments)
-    end
+describe 'Course' do
+  # Check the proper attributes provided
+  it "contains valid attributes" do
+    course = Course.new(name: "COMS1234", course_id: "1234")
+    expect(course.name).to be_present
+    expect(course.course_id).to be_present
+    expect(course).to be_valid
   end
 
-  describe "validations" do
-    it "is valid with a name" do
-      expect(course).to be_valid
-    end
 
-    it "is not valid without a name" do
-      course.name = nil
-      expect(course).to_not be_valid
-    end
+  it 'can have many students through enrollments' do
+    course = Course.create(name: 'Science')
+    student1 = Student.create(name: 'Alice', email: 'alice@example.com')
+    student2 = Student.create(name: 'Bob', email: 'bob@example.com')
+    Enrollment.create(course: course, student: student1)
+    Enrollment.create(course: course, student: student2)
+    expect(course.students).to include(student1, student2)
   end
+
+  it 'can have many groups' do
+    course = Course.create(name: 'History')
+    group1 = course.groups.create(group_id: 1)
+    group2 = course.groups.create(group_id: 2)
+    expect(course.groups).to include(group1, group2)
+  end
+
 end
-
-
 
 
 
