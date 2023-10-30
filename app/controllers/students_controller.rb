@@ -1,4 +1,5 @@
 class StudentsController < ApplicationController
+  
   def index
     @students = Student.all
   end
@@ -25,12 +26,15 @@ class StudentsController < ApplicationController
     course = Course.find_by(course_id: course_id)
     student = Student.find(params[:id])
     if course
-      unless student.courses.include?(course)
+      if student.courses.include?(course)
+        redirect_to student_path(student), notice: 'You are already enrolled in this course.'
+      else
         student.courses << course
         redirect_to student_path(student), notice: 'Successfully enrolled in the course.'
-      end 
+      end
     else
-      redirect_to student_path(student), alert: 'Invalid Course ID. Please try again.'
+      redirect_to student_path(student)
+      flash[:alert]= "Invalid Course ID. Please try again."
     end
     
   end

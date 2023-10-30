@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_29_192411) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_30_163922) do
   create_table "courses", force: :cascade do |t|
     t.string "name"
     t.string "course_id"
@@ -27,6 +27,23 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_29_192411) do
     t.index ["student_id"], name: "index_enrollments_on_student_id"
   end
 
+  create_table "groups", force: :cascade do |t|
+    t.integer "group_id"
+    t.integer "course_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_groups_on_course_id"
+  end
+
+  create_table "groups_students", id: false, force: :cascade do |t|
+    t.integer "group_id"
+    t.integer "student_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_groups_students_on_group_id"
+    t.index ["student_id"], name: "index_groups_students_on_student_id"
+  end
+
   create_table "students", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -37,4 +54,5 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_29_192411) do
 
   add_foreign_key "enrollments", "courses"
   add_foreign_key "enrollments", "students"
+  add_foreign_key "groups", "courses"
 end

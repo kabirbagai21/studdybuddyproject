@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     resources :enrollments
   end
 
+  resources :groups
+
   #post '/enroll_student', to: 'courses#enroll_student'
   # Defines the root path route ("/")
   # root "posts#index"

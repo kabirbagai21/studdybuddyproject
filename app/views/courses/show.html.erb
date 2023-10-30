@@ -7,3 +7,10 @@
     <%= link_to student.name, student %>
   </div>
 <% end %>
+
+<h2>Groups:</h2>
+<% @groups.each do |group| %>
+  <div>
+    <%= link_to group.group_id, group %>
+  </div>
+<% end %>

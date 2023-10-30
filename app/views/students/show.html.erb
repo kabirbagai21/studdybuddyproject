@@ -2,10 +2,12 @@
 <h2><%= @student.email %></h2>
 <p><%= @student.bio %></p>
 
+
 <div class="row">
   <%= link_to 'Edit Profile', edit_student_path(@student), :class => 'btn btn-primary col-2' %>
 </div>
 
+<h3>My Courses</h3>
 <% if @enrolled_courses.present? %>
     <% @enrolled_courses.each do |course| %>
         <div>
@@ -16,8 +18,17 @@
   <p>No enrolled courses</p>
 <% end %>
 
+<br>
+
 <%= form_with(url: enroll_student_path(@student), method: :post) do |form| %>
     <%= form.label :course_id, 'Course ID' %>
     <%= form.text_field :course_id %>
     <%= form.submit 'Join' %>
 <% end %>
+
+<% flash.each do |type, msg| %>
+    <div>
+      <%= msg %>
+    </div>
+  <% end %>
+  

@@ -1,0 +1,9 @@
+<h1>Group: <%= @group.group_id %> </h1>
+<h2><%= @course.name %></h2>
+
+<h2>Students:</h2>
+<% @members.each do |member| %>
+  <div>
+    <%= link_to member.name, member %>
+  </div>
+<% end %>
