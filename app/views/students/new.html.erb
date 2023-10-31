@@ -1,1 +1,21 @@
+<h1>New Student</h1>
 
+<%= form_for @student do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.text_field :email, class: 'form-control' %>
+  </div>
+
+  <!-- Add other fields -->
+
+  <div class="form-group">
+    <%= f.submit 'Create Student', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', students_path %>
