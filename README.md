@@ -16,10 +16,9 @@ StudyBuddy is a platform designed to help students find study, homework, and pro
   - Ensure all environment variables and configurations are set.
   - Set up your database.yml with the correct username and password for PostgreSQL.
 
-* **Database creation**:
-* rails db:create
+* **Database creation**: rails db:create
 
-* 
+
 * **Database initialization**: 
 rails db:migrate
 
