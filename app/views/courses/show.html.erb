@@ -1,16 +1,25 @@
-<h1><%= @course.name %></h1>
+<div class="container mt-5">
+  <h1 class="mb-4"><%= @course.name %></h1>
 
-
-<h2>Enrolled Students:</h2>
-<% @enrolled_students.each do |student| %>
-  <div>
-    <%= link_to student.name, student %>
+  <div class="mb-4">
+    <h2>Enrolled Students:</h2>
+    <ul class="list-group">
+      <% @enrolled_students.each do |student| %>
+        <li class="list-group-item">
+          <%= link_to student.name, student %>
+        </li>
+      <% end %>
+    </ul>
   </div>
-<% end %>
 
-<h2>Groups:</h2>
-<% @groups.each do |group| %>
   <div>
-    <%= link_to group.group_id, group %>
+    <h2>Groups:</h2>
+    <ul class="list-group">
+      <% @groups.each do |group| %>
+        <li class="list-group-item">
+          <%= link_to group.group_id, group %>
+        </li>
+      <% end %>
+    </ul>
   </div>
-<% end %>
+</div>
