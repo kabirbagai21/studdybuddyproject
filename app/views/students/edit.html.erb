@@ -1,19 +1,19 @@
 <div class="container mt-5">
   <h2 class="mb-4">Edit Student Profile</h2>
-  <%= form_tag student_path(@student), :method => :put, class: 'border p-4 rounded' do %>
+  <%= form_tag student_path(@student), method: :put, class: 'border p-4 rounded' do %>
     <div class="mb-3">
-      <%= label :student, :name, 'Name', :class => 'form-label' %>
-      <%= text_field :student, 'name', :class => 'form-control' %>
+      <%= label :student, :name, 'Name', class: 'form-label' %>
+      <%= text_field :student, 'name', class: 'form-control' %>
     </div>
     <div class="mb-3">
-      <%= label :movie, :email, 'Email', :class => 'form-label' %>
-      <%= text_field :student, 'email', :class => 'form-control' %>
+      <%= label :student, :email, 'Email', class: 'form-label' %>
+      <%= email_field :student, 'email', class: 'form-control' %>
     </div>
     <div class="mb-3">
-      <%= label :movie, :bio, 'Bio', :class => 'form-label' %>
-      <%= text_field :student, 'bio', :class => 'form-control' %>
+      <%= label :student, :bio, 'Bio', class: 'form-label' %>
+      <%= text_area :student, 'bio', class: 'form-control', rows: 3 %>
     </div>
 
-    <%= submit_tag 'Update Profile Info', :class => 'btn btn-primary' %>
+    <%= submit_tag 'Update Profile Info', class: 'btn btn-primary mt-2 transition-hover' %>
   <% end %>
 </div>
