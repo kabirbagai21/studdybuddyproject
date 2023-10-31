@@ -1,12 +1,10 @@
-<h1>Students</h1>
-<ul>
-  <% @students.each do |student| %>
-    <li>
-        <a href="/students/<%= student.id %>">
-            <%= student.name %>
-        </a>
-    </li>
-  <% end %>
-</ul>
-
-
+<div class="container mt-5">
+  <h1 class="mb-4">Students</h1>
+  <ul class="list-group">
+    <% @students.each do |student| %>
+      <li class="list-group-item">
+        <%= link_to student.name, student %>
+      </li>
+    <% end %>
+  </ul>
+</div>
