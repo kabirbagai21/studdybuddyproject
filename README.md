@@ -6,10 +6,10 @@ StudyBuddy is a platform designed to help students find study, homework, and pro
 
 **Team members**:
 
--Brian Luna (bsl2130)
--Kabir Bagai (kb3343)
--Sayef Iqbal (si2400)
--Yuya Taniguchi (yt2749)
+- Brian Luna (bsl2130)
+- Kabir Bagai (kb3343)
+- Sayef Iqbal (si2400)
+- Yuya Taniguchi (yt2749)
 
 ## Things you may want to cover:
 
