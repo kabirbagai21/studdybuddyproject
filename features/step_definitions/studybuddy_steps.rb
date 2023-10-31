@@ -1,5 +1,5 @@
-require_relative '../../spec/rails_helper'
-require_relative '../../spec/spec_helper'
+# require_relative '../../spec/rails_helper'
+# require_relative '../../spec/spec_helper'
 
 # Add a declarative step here for populating the DB with movies.
 Given /the following students exist/ do |students_table|
