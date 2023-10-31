@@ -29,6 +29,8 @@ StudyBuddy is a platform designed to help students find study, homework, and pro
 * **Database initialization**: 
 rails db:migrate
 
+* **Load seed data**:
+db:seed
 
 * **How to run the test suite**: 
 bundle exec rspec spec
