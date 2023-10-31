@@ -48,6 +48,12 @@ StudyBuddy is a platform designed to help students find study, homework, and pro
 * Ensure all environment variables are set on the deployment platform.
 * Follow standard Rails deployment procedures for platforms like Heroku or AWS.
 
+### Cucumber Scenarios
+
+The Cucumber feature files are located in the `features` folder.
+The step definition files are located in the `features/step_definitions` folder.
+Tu run Cucumber scenarios, execute the following: bundle exec cucumber
+
 ### Rspec Tests
 
 The rspec test files are located in the `spec` folder.
