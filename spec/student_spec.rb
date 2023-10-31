@@ -1,6 +1,6 @@
 require_relative '../app/models/student.rb'
 
-describe 'Student' do
+RSpec.describe Student, type: :model do
   # Check the proper attributes provided
   it "contains valid attributes" do
     student = Student.new(name: "John Doe", email: "john@example.com", bio: "A bio.", created_at: Time.now, updated_at: Time.now)
