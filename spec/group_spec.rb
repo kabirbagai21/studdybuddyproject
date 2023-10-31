@@ -1,3 +1,4 @@
+require 'rails_helper'
 require_relative '../app/models/group.rb'
 
 describe 'Group' do

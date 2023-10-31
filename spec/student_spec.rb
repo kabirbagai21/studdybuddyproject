@@ -1,3 +1,4 @@
+require 'rails_helper'
 require_relative '../app/models/student.rb'
 
 RSpec.describe Student, type: :model do
