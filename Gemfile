@@ -8,6 +8,9 @@ gem "rails", "~> 7.1.1"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
+#Installing rspec for rails
+gem "rspec-rails"
+
 # Use sqlite3 as the database for Active Record
 gem "sqlite3", "~> 1.4"
 
@@ -22,6 +25,9 @@ gem "turbo-rails"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
+
+#Bootstrap
+gem 'bootstrap', '~> 5.0.2'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
@@ -65,7 +71,6 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]\
-  gem "rspec-rails"
   gem "capybara"
   gem "selenium-webdriver"
 end
