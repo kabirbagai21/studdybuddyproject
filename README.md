@@ -52,7 +52,7 @@ StudyBuddy is a platform designed to help students find study, homework, and pro
 
 The Cucumber feature files are located in the `features` folder.
 The step definition files are located in the `features/step_definitions` folder.
-Tu run Cucumber scenarios, execute the following: bundle exec cucumber
+To run Cucumber scenarios, execute the following: bundle exec cucumber
 
 ### Rspec Tests
 
