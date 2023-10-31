@@ -1,6 +1,8 @@
 require 'rails_helper'
 require_relative '../app/models/group.rb'
 
+
+
 describe 'Group' do
   it 'contains valid attributes' do
     course = Course.create(id: 1, name: 'History')

@@ -4,6 +4,13 @@
 
 StudyBuddy is a platform designed to help students find study, homework, and project partners for their classes. It allows students to enroll in courses, join groups, and view group availability.
 
+**Team members**:
+
+- Brian Luna (bsl2130)
+- Kabir Bagai (kb3343)
+- Sayef Iqbal (si2400)
+- Yuya Taniguchi (yt2749)
+
 ## Things you may want to cover:
 
 * **Ruby version**: Ruby 2.7.0
@@ -22,6 +29,8 @@ StudyBuddy is a platform designed to help students find study, homework, and pro
 * **Database initialization**: 
 rails db:migrate
 
+* **Load seed data**:
+db:seed
 
 * **How to run the test suite**: 
 bundle exec rspec spec

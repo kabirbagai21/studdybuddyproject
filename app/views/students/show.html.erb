@@ -1,34 +1,37 @@
-<h1><%= @student.name %></h1>
-<h2><%= @student.email %></h2>
-<p><%= @student.bio %></p>
+  <div class="container mt-5">
+  <h1 class="mb-4"><%= @student.name %></h1>
+  <h2 class="mb-3"><%= @student.email %></h2>
+  <p class="mb-4"><%= @student.bio %></p>
 
-
-<div class="row">
-  <%= link_to 'Edit Profile', edit_student_path(@student), :class => 'btn btn-primary col-2' %>
-</div>
-
-<h3>My Courses</h3>
-<% if @enrolled_courses.present? %>
-    <% @enrolled_courses.each do |course| %>
-        <div>
-          <%= link_to course.name, course %>
-        </div>
+  <div class="mb-4">
+    <h3>My Courses</h3>
+    <% if @enrolled_courses.present? %>
+      <ul class="list-group">
+        <% @enrolled_courses.each do |course| %>
+          <li class="list-group-item">
+            <%= link_to course.name, course %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No enrolled courses</p>
     <% end %>
-<% else %>
-  <p>No enrolled courses</p>
-<% end %>
+  </div>
 
-<br>
+  <div class="mb-4">
+    <%= form_with(url: enroll_student_path(@student), method: :post) do |form| %>
+      <div class="mb-3">
+        <%= form.label :course_id, 'Course ID', class: 'form-label' %>
+        <%= form.text_field :course_id, class: 'form-control' %>
+      </div>
+      <%= form.submit 'Join', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
 
-<%= form_with(url: enroll_student_path(@student), method: :post) do |form| %>
-    <%= form.label :course_id, 'Course ID' %>
-    <%= form.text_field :course_id %>
-    <%= form.submit 'Join' %>
-<% end %>
-
-<% flash.each do |type, msg| %>
-    <div>
+  <% flash.each do |type, msg| %>
+    <div class="alert alert-info">
       <%= msg %>
     </div>
   <% end %>
+</div>
   

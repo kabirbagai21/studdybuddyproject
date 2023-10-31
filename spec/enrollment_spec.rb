@@ -1,6 +1,8 @@
 require 'rails_helper'
 require_relative '../app/models/enrollment.rb'
 
+
+
 describe 'Enrollment' do
   it 'contains valid attributes' do
     student = Student.create(name: 'Alice', email: 'alice@example.com')

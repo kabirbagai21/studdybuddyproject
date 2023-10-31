@@ -1,6 +1,8 @@
 require 'rails_helper'
 require_relative '../app/models/course.rb'
 
+
+
 describe 'Course' do
   # Check the proper attributes provided
   it "contains valid attributes" do
