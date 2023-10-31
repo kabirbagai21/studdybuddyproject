@@ -17,16 +17,16 @@ Background: students in database
 Scenario: view the profile for each student
   Given I am on the StudyBuddy home page
   When  I follow "Kabir Bagai"
-  Then  I should be on the details page for "Kabir Bagai"
+  Then  I should be on the profile page for "Kabir Bagai"
   And   I should see "kb3343@columbia.edu"
   But   I should not see "yt2749@columbia.edu"
 
 Scenario: edit profile for a student
-  Given I am on the details page for "Kabir Bagai"
-  And I press "Edit Profile"
-  Then  I should be on the edit student profile page for "Kabir Bagai"
-  When  I fill in "bio" with "Computer Science Major"
+  Given I am on the profile page for "Kabir Bagai"
+  When  I follow "Edit Profile"
+  Then  I should be on the edit page for "Kabir Bagai"
+  When  I fill in "Bio" with "Computer Science Major"
   And   I press the "Update Profile Info" button
-  Then  I should be on the details page for "Kabir Bagai"
+  Then  I should be on the profile page for "Kabir Bagai"
   And   I should see "Computer Science Major"
   But   I should not see "CS Major"
