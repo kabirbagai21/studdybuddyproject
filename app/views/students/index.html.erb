@@ -1,10 +1,31 @@
-<div class="container mt-5">
-  <h1 class="mb-4">Students</h1>
-  <ul class="list-group">
-    <% @students.each do |student| %>
-      <li class="list-group-item">
-        <%= link_to student.name, student %>
-      </li>
-    <% end %>
-  </ul>
+<div class="students-section">
+  <header>
+    <h1>Students</h1>
+    <%= link_to 'Add New Student', new_student_path, class: 'btn btn-primary mb-3' %>
+  </header>
+
+  <% if @students.any? %>
+    <table class="table table-bordered table-striped students-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Number of Courses</th>
+          <!-- Add other columns as needed -->
+        </tr>
+      </thead>
+      <tbody>
+        <% @students.each do |student| %>
+          <tr>
+            <td><%= link_to student.name, student_path(student) %></td>
+            <td><%= student.email %></td>
+            <td><%= student.courses.count %></td>
+            <!-- Add other student attributes as needed -->
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="alert alert-info">No students found. Please add a new student.</p>
+  <% end %>
 </div>
