@@ -1,6 +1,10 @@
 # StudyBuddy
 
-StudyBuddy is a platform designed to help students find study, homework, and project partners for their classes. It allows students to enroll in courses, join groups, and view group availability.
+StudyBuddy is a collaborative platform designed to help students find study, homework, and project partners for their classes. With features that allow students to enroll in courses, join groups, and view group availability, StudyBuddy aims to enhance the academic experience and foster a community of learners.
+
+## Live Application
+
+The application is live at: [StudyBuddy on Heroku](https://stark-headland-66813-685e9c0117bd.herokuapp.com)
 
 ## Team members:
 
@@ -9,50 +13,54 @@ StudyBuddy is a platform designed to help students find study, homework, and pro
 - Sayef Iqbal (si2400)
 - Yuya Taniguchi (yt2749)
 
-## Things you may want to cover:
+## Features
 
-- **Ruby version**: Ruby 2.7.0
+- Course Enrollment: Students can browse and enroll in courses relevant to their studies.
+- Group Collaboration: Enables students to join groups for collaborative study sessions.
+- Availability Viewing: Students can view the availability of groups to plan their study schedules.
 
-- **System dependencies**:
-  - Rails 6.0.3.4
-  - PostgreSQL
+## Getting Started
 
-- **Configuration**:
-  - Ensure all environment variables and configurations are set.
-  - Set up your `database.yml` with the correct username and password for PostgreSQL.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-- **Database creation**: 
-  `rails db:create`
+### Prerequisites
 
-- **Database initialization**: 
-  `rails db:migrate`
+- Ruby version: Ruby 2.7.0
+- Rails version: Rails 6.0.3.4
+- Database: PostgreSQL
 
-- **Load seed data**: 
-  `rails db:seed`
+### Installation
 
-- **How to run the Cucumber scenarios**:
-  `bundle exec cucumber`
+1. Clone the repository to your local machine.
+2. Navigate to the project directory.
+3. Install the required gems: bundle install
+4. Set up your `database.yml` with the correct username and password for PostgreSQL.
+5. Create the database: rails db:create
+6. Initialize the database: rails db:migrate
+7. Load the seed data: rails db:seed
 
-- **How to run the test suite**:
-  `bundle exec rspec spec`
 
-- **Services (job queues, cache servers, search engines, etc.)**:
-  - Currently, no additional services like Redis or Sidekiq are integrated.
+### Running the Tests
 
-- **Deployment instructions**:
-  - Ensure all environment variables are set on the deployment platform.
-  - Follow standard Rails deployment procedures for platforms like Heroku or AWS.
+- To run the Cucumber scenarios:
+bundle exec cucumber
 
-### Cucumber Scenarios
+- To run the RSpec test suite:
+bundle exec rspec spec
 
-The Cucumber feature files are located in the `features` folder.
-The step definition files are located in the `features/step_definitions` folder.
-To run Cucumber scenarios, execute the following: 
-`bundle exec cucumber`
 
-### Rspec Tests
 
-The rspec test files are located in the `spec` folder.
-To run rspec tests, execute the following:
-`bundle exec rspec spec`
+### Services
+
+Currently, no additional services like Redis or Sidekiq are integrated.
+
+### Deployment
+
+To deploy this on a live system, ensure all environment variables are set on the deployment platform and follow standard Rails deployment procedures for platforms like Heroku or AWS.
+
+## Documentation
+
+- **Cucumber Scenarios**: Located in the `features` folder with step definitions in `features/step_definitions`.
+- **RSpec Tests**: Test files are in the `spec` folder.
+
 
