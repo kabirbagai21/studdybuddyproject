@@ -35,9 +35,9 @@ These instructions will get you a copy of the project up and running on your loc
 2. Navigate to the project directory.
 3. Install the required gems: bundle install
 4. Set up your PostgreSQL:
-  -brew reinstall libpq
-  -export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
-  -gem install pg
+  - brew reinstall libpq
+  - export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+  - gem install pg
 5. Create the database: rails db:create
 6. Initialize the database: rails db:migrate
 7. Load the seed data: rails db:seed
