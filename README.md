@@ -13,11 +13,11 @@ The application is live at: [StudyBuddy on Heroku](https://stark-headland-66813-
 - Sayef Iqbal (si2400)
 - Yuya Taniguchi (yt2749)
 
-## Features
+## Current Features
 
-- Course Enrollment: Students can browse and enroll in courses relevant to their studies.
-- Group Collaboration: Enables students to join groups for collaborative study sessions.
-- Availability Viewing: Students can view the availability of groups to plan their study schedules.
+- Course Enrollment: Students can enroll in courses relevant to their studies using a course code (for example use 4152 or 3157).
+- Group Collaboration: Enables students to view classmates and groups in courses they're enrolled in.
+- Student Profile: Student can create and edit a profile with relevant info
 
 ## Getting Started
 
