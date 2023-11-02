@@ -1,0 +1,46 @@
+Requirements for Iter 2
+
+1. Registration (Auth) -> Use Student Model
+2. Login/Logout (Auth) -> Use Student Model
+3. Create Profile
+
+
+
+Scenario
+
+
+Register
+Login
+Student create Profile
+
+After login, we should see students private profile, 
+
+Student enrolls in a course (how he/she gets code is for later) (Done)
+Stduent gets enrolled in class (Done)
+
+Students sees the list of classes they are enrolled in
+
+Once you enroll in a class you should then only be able to see groups. Not before that.
+
+View for Class
+
+View for Groups (We will remove enrolled students info from this page)
+
+Note: (DB Change) Create a group-request table to store which student requested to join which groups.
+
+
+Class
+ - Groups
+    - Group
+      - Members -> Links to Student profile (public/private), current we have only private and is accessible if you login. For public we should be able to query the student table and retrieve students public info and show them in memebers page.
+      - Request to join a group
+
+      - Need to create group owner column in groups which will be the student id who created the group. Only that student can accept the request.
+
+      - If you are group owner then you should see all students who requested to join and approve them this will be in the group level page alongside members. They can also remove people from group.
+
+    - Be able to create a group
+
+
+Important: A student cannot join 2 groups at same time. They will have to leave a group and then join another. 
+
