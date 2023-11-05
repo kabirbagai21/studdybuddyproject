@@ -1,5 +1,8 @@
 source "https://rubygems.org"
 
+gem 'bcrypt', '~> 3.1.7' # For password hashing
+gem 'devise', '~> 4.8'   # For user authentication
+
 ruby "3.0.6"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"

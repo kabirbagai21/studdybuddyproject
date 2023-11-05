@@ -18,7 +18,7 @@
         <% @students.each do |student| %>
           <tr>
             <td><%= link_to student.name, student_path(student) %></td>
-            <td><%= student.email %></td>
+            <td><%= student.email_old %></td>
             <td><%= student.courses.count %></td>
             <!-- Add other student attributes as needed -->
           </tr>
