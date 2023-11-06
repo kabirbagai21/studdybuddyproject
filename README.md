@@ -136,6 +136,10 @@ gem 'bcrypt', '~> 3.1.7' # For password hashing
 gem 'devise', '~> 4.8'   # For user authentication
 ```
 
+```
+bundle install
+```
+
 ### Run db migrations
 ```
 rails db:create
