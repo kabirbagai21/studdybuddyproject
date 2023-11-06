@@ -15,8 +15,8 @@ describe 'Course' do
 
   it 'can have many students through enrollments' do
     course = Course.create(name: 'Science')
-    student1 = Student.create(name: 'Alice', email: 'alice@example.com')
-    student2 = Student.create(name: 'Bob', email: 'bob@example.com')
+    student1 = Student.create(name: 'Alice', email_old: 'alice@example.com', email: 'alice@example.com', password: '123456')
+    student2 = Student.create(name: 'Bob', email_old: 'bob@example.com', email: 'bob@example.com', password: '123456')
     Enrollment.create(course: course, student: student1)
     Enrollment.create(course: course, student: student2)
     expect(course.students).to include(student1, student2)
