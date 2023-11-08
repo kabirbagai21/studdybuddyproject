@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_05_145010) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_07_184522) do
   create_table "courses", force: :cascade do |t|
     t.string "name"
     t.string "course_id"
@@ -27,21 +27,23 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_05_145010) do
     t.index ["student_id"], name: "index_enrollments_on_student_id"
   end
 
+  create_table "group_members", id: false, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "student_id", null: false
+    t.integer "group_id", null: false
+    t.index ["group_id"], name: "index_group_members_on_group_id"
+    t.index ["student_id"], name: "index_group_members_on_student_id"
+  end
+
   create_table "groups", force: :cascade do |t|
     t.integer "group_id"
     t.integer "course_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "group_owner_id"
     t.index ["course_id"], name: "index_groups_on_course_id"
-  end
-
-  create_table "groups_students", id: false, force: :cascade do |t|
-    t.integer "group_id"
-    t.integer "student_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["group_id"], name: "index_groups_students_on_group_id"
-    t.index ["student_id"], name: "index_groups_students_on_student_id"
+    t.index ["group_owner_id"], name: "index_groups_on_group_owner_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -61,5 +63,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_05_145010) do
 
   add_foreign_key "enrollments", "courses"
   add_foreign_key "enrollments", "students"
+  add_foreign_key "group_members", "groups"
+  add_foreign_key "group_members", "students"
   add_foreign_key "groups", "courses"
+  add_foreign_key "groups", "students", column: "group_owner_id"
 end

@@ -27,6 +27,11 @@
     <% end %>
   </div>
 
+  <% flash.each do |type, msg| %>
+    <div class="alert alert-<%= type %> mt-3">
+      <%= msg %>
+    </div>
+  <% end %>
 
   <div class="enroll-course-form mt-3">
     <%= form_with(url: enroll_student_path(@student), method: :post) do |form| %>
@@ -38,9 +43,4 @@
     <% end %>
   </div>
 
-  <% flash.each do |type, msg| %>
-    <div class="alert alert-<%= type %> mt-3">
-      <%= msg %>
-    </div>
-  <% end %>
 </div>

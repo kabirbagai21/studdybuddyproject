@@ -1,9 +1,25 @@
 class GroupsController < ApplicationController
     def show
         @group = Group.find(params[:id])
-        @members = @group.students
         @course = @group.course
+        @owner_name = Student.find(@group.group_owner_id).name
     end 
+
+    def new
+      @course = Course.find(params[:course_id])
+
+      if Group.where(group_owner_id: current_student.id).exists?
+        flash[:alert] = "You cannot create more than one group."
+        redirect_to course_path(@course)
+        return
+      end
+
+      @group = @course.groups.new
+      @group.group_owner_id = current_student.id
+      @group.students << current_student
+      @group.save
+      redirect_to course_path(@course)
+    end
     
     def enroll_student
         group = Group.find(params[:group_id])
@@ -16,4 +32,5 @@ class GroupsController < ApplicationController
           redirect_to group, alert: 'Group is full. Cannot enroll.'
         end
     end
+
 end

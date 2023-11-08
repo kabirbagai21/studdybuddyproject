@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'public_profiles/show'
   devise_for :students
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -9,15 +10,22 @@ Rails.application.routes.draw do
 
   resources :students do
     resources :enrollments
+    resources :group_members
     post 'enroll', on: :member
   end
 
   resources :courses do
     resources :enrollments
+    resources :groups
   end
 
-  resources :groups
+  resources :groups do 
+    resources :group_members
+    resources :public_profiles, only: [:show]
+  end 
 
+  resources :public_profiles, only: [:show]
+  
   #post '/enroll_student', to: 'courses#enroll_student'
   # Defines the root path route ("/")
   # root "posts#index"
