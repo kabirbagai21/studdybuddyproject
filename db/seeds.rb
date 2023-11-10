@@ -7,7 +7,7 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-students = [{:name => 'Kabir', :email => 'kb3343@columbia.edu', :bio => 'CS Major'}, {:name => 'Yuya', :email => 'yt2749@columbia.edu', :bio => 'CS Major'}]
+students = [{:name => 'Kabir', :email => 'kb3343@columbia.edu', password: '123456789', :bio => 'CS Major'}, {:name => 'Yuya', :email => 'yt2749@columbia.edu', password: '123456789', :bio => 'CS Major'}]
 courses = [{:name => 'Engineering SaaS', :course_id => '4152'}, {:name => 'AP', :course_id => '3157'}]
 students.each do |student|
     Student.create!(student)

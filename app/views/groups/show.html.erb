@@ -1,9 +1,18 @@
 <h1>Group: <%= @group.group_id %> </h1>
 <h2><%= @course.name %></h2>
 
+<p>Owner: <%= @owner_name %></p>
+
 <h2>Students:</h2>
-<% @members.each do |member| %>
+<% @group.students.each do |student| %>
   <div>
-    <%= link_to member.name, member %>
+    <%= link_to student.name, public_profile_path(student, group_id: @group.id) %>
   </div>
 <% end %>
+
+
+<%= button_to "Delete Group", group_path(@group), method: :delete, data: { confirm: "Are you sure?" } %>
+
+<div class="mb-3">
+<%= link_to 'Return to Course Page', course_path(@course), class: 'btn btn-primary' %>
+</div>

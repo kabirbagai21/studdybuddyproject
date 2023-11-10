@@ -22,4 +22,16 @@
       <% end %>
     </ul>
   </div>
+
+  <% flash.each do |type, msg| %>
+    <div class="alert alert-<%= type %> mt-3">
+      <%= msg %>
+    </div>
+  <% end %>
+
+
+
+  <%= link_to 'Create New Group', new_course_group_path(@course), class: 'btn btn-primary' %>
 </div>
+
+

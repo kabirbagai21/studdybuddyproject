@@ -1,0 +1,5 @@
+Github: https://github.com/kabirbagai21/studdybuddyproject/tree/iter1
+
+Heroku: https://stark-headland-66813-685e9c0117bd.herokuapp.com
+
+Note: Github link contains README for the application
