@@ -29,7 +29,22 @@ describe 'Group' do
     group.students << student2
     expect(group.students).to include(student1, student2)
   end
+
+  # New tests
+  describe 'associations' do
+    it 'belongs to a course' do
+      course = Course.create(name: 'Mathematics')
+      group = Group.create(course: course)
+      expect(group.course).to eq(course)
+    end
+
+    it 'can have and belong to many students' do
+      course = Course.create(name: 'Mathematics') # Ensure a course exists
+      group = Group.create(course_id: course.id, created_at: Time.now, updated_at: Time.now)
+      student1 = Student.create(name: 'Alice')
+      student2 = Student.create(name: 'Bob')
+      group.students << [student1, student2]
+      expect(group.students).to include(student1, student2)
+    end
+  end
 end
-
-
-
