@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_07_184522) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_10_215347) do
   create_table "courses", force: :cascade do |t|
     t.string "name"
     t.string "course_id"
@@ -34,6 +34,18 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_07_184522) do
     t.integer "group_id", null: false
     t.index ["group_id"], name: "index_group_members_on_group_id"
     t.index ["student_id"], name: "index_group_members_on_student_id"
+  end
+
+  create_table "group_requests", force: :cascade do |t|
+    t.integer "student_id", null: false
+    t.integer "group_id", null: false
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "course_id", null: false
+    t.index ["course_id"], name: "index_group_requests_on_course_id"
+    t.index ["group_id"], name: "index_group_requests_on_group_id"
+    t.index ["student_id"], name: "index_group_requests_on_student_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -65,6 +77,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_07_184522) do
   add_foreign_key "enrollments", "students"
   add_foreign_key "group_members", "groups"
   add_foreign_key "group_members", "students"
+  add_foreign_key "group_requests", "courses"
+  add_foreign_key "group_requests", "groups"
+  add_foreign_key "group_requests", "students"
   add_foreign_key "groups", "courses"
   add_foreign_key "groups", "students", column: "group_owner_id"
 end

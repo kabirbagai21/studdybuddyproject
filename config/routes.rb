@@ -11,18 +11,26 @@ Rails.application.routes.draw do
   resources :students do
     resources :enrollments
     resources :group_members
+    resources :group_requests
     post 'enroll', on: :member
   end
 
   resources :courses do
     resources :enrollments
     resources :groups
+    resources :group_requests
   end
 
   resources :groups do 
     resources :group_members
+    resources :group_requests
     resources :public_profiles, only: [:show]
+    patch 'leave', on: :member
   end 
+
+  resources :group_requests do
+    patch 'approve', on: :member
+  end
 
   resources :public_profiles, only: [:show]
   

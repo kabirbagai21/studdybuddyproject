@@ -12,4 +12,8 @@ class Student < ApplicationRecord
   has_many :group_members
   has_many :groups, through: :group_members
 
+  #Group-request association
+  has_many :group_requests
+  has_many :requested_groups, through: :group_requests, source: :group
+
 end
