@@ -12,12 +12,26 @@
     </ul>
   </div>
 
+  <div class="mb-4">
+    <h2>My Groups:</h2>
+    <ul class="list-group">
+      <% @user_groups.each do |g| %>
+        <li class="list-group-item">
+          <%= link_to g.group_id, g %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
   <div>
-    <h2>Groups:</h2>
+    <h2>Class Groups:</h2>
     <ul class="list-group">
       <% @groups.each do |group| %>
         <li class="list-group-item">
           <%= link_to group.group_id, group %>
+          <% if current_student.requested_groups.include?(group) %>
+            <p>Requested</p>
+          <% end %>
         </li>
       <% end %>
     </ul>
@@ -28,10 +42,11 @@
       <%= msg %>
     </div>
   <% end %>
-
-
-
+  
   <%= link_to 'Create New Group', new_course_group_path(@course), class: 'btn btn-primary' %>
+
+  <%= link_to "My Profile", student_path(current_student), class: "btn btn-primary float-right" %>
+
 </div>
 
 

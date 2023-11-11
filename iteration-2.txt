@@ -44,3 +44,26 @@ Class
 
 Important: A student cannot join 2 groups at same time. They will have to leave a group and then join another. 
 
+11/8
+Delete group
+Remove group members
+join group requests
+leave group
+add course column to group table
+
+
+Sayef
+UI
+More fields for user profile
+
+Yuya
+Cucumber Tests
+
+Brian
+RSpec 
+UI
+
+Kabir 
+new features
+
+
