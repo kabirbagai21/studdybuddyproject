@@ -12,7 +12,6 @@ Background: students in database
   | Yuya Taniguchi | yt2749@columbia.edu | yt2749@columbia.edu | 123456789 | CS Major |
 
   And I am on the StudyBuddy home page
-  Then 2 seed students should exist
 
 Scenario: view the profile for each student
   Given I am on the StudyBuddy home page

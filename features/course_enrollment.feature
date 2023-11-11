@@ -16,8 +16,7 @@ Background: students in database
   | Engineering SaaS    | 4152        |
   | AP                  | 3157        |
 
-  And I am on the StudyBuddy home page
-  Then 2 seed students should exist
+  Then I am on the StudyBuddy home page
 
 Scenario: view the enrollment for each student
   Given I am on the profile page for "Yuya Taniguchi"

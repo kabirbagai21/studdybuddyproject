@@ -1,12 +1,13 @@
 # require_relative '../../spec/rails_helper'
 # require_relative '../../spec/spec_helper'
 
+
 # Add a declarative step here for populating the DB with movies.
 Given /the following students exist/ do |students_table|
   students_table.hashes.each do |student|
       # each returned element will be a hash whose key is the table header.
       # you should arrange to add that movie to the database here.
-    Student.create(name: student[:name], email: student[:email], bio: student[:bio])
+    Student.create(name: student[:name], email: student[:email], email_old: student[:email_old], password: student[:password], bio: student[:bio])
   end
 end
 
