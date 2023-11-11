@@ -45,6 +45,16 @@ Scenario: blank password
   And   I press the "Sign up" button
   Then  I should see "Password can't be blank"
 
+Scenario: password too short
+  Given I am on the sign in page
+  When  I follow "Sign up"
+  Then  I should be on the sign up page
+  When  I fill in "Email" with "yuya@gmail.com"
+  And   I fill in "Password" with "123"
+  And   I fill in "Password confirmation" with "123"
+  And   I press the "Sign up" button
+  Then  I should see "Password is too short (minimum is 6 characters)"
+
 Scenario: password and password confirmation do not match
   Given I am on the sign in page
   When  I follow "Sign up"
