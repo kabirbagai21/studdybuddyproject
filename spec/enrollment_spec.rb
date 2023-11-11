@@ -33,4 +33,27 @@ describe 'Enrollment' do
     expect(enrollment.course).to eq(course)
   end
 
+  # New tests
+
+  it 'does not allow duplicate enrollment for the same course and student' do
+    student = Student.create(name: 'Bob', email: 'bob@example.com')
+    course = Course.create(name: 'Mathematics')
+    Enrollment.create(student: student, course: course)
+    duplicate_enrollment = Enrollment.new(student: student, course: course)
+    expect(duplicate_enrollment).to_not be_valid
+  end
+
+  it 'increases enrollment count when a new enrollment is created' do
+    student = Student.create(name: 'Charlie', email: 'charlie@example.com')
+    course = Course.create(name: 'Physics')
+    expect { Enrollment.create(student: student, course: course) }.to change(Enrollment, :count).by(1)
+  end
+
+  it 'can be deleted' do
+    student = Student.create(name: 'Dave', email: 'dave@example.com')
+    course = Course.create(name: 'Art')
+    enrollment = Enrollment.create(student: student, course: course)
+    expect { enrollment.destroy }.to change(Enrollment, :count).by(-1)
+  end
+
 end
