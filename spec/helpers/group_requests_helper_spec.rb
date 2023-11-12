@@ -11,5 +11,13 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe GroupRequestsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#format_request_status' do
+    it 'returns the formatted status for a pending request' do
+      expect(helper.format_request_status('pending')).to eq('Pending Approval')
+    end
+
+    it 'returns the formatted status for an approved request' do
+      expect(helper.format_request_status('approved')).to eq('Approved')
+    end
+  end
 end
