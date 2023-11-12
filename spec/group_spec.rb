@@ -29,6 +29,28 @@ describe 'Group' do
     group.students << student2
     expect(group.students).to include(student1, student2)
   end
+
+    # Tests for group creation and group owner
+  describe 'Group creation' do
+    let(:course) { Course.create(name: 'Mathematics') }
+    let(:student) { Student.create(name: 'John Doe', email: 'john@example.com', password: 'password') }
+
+    it 'allows a user to create a group' do
+      group = Group.create(course_id: course.id, group_owner_id: student.id)
+      expect(group).to be_valid
+    end
+
+    it 'does not allow a user to create more than one group' do
+      Group.create(course_id: course.id, group_owner_id: student.id)
+      second_group = Group.new(course_id: course.id, group_owner_id: student.id)
+      expect(second_group.valid?).to be_falsey
+    end
+
+    it 'sets the group owner correctly' do
+      group = Group.create(course_id: course.id, group_owner_id: student.id)
+      expect(group.group_owner_id).to eq(student.id)
+    end
+  end
 end
 
 
