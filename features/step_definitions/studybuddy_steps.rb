@@ -28,6 +28,13 @@ And /I am logged in with email "(.+)" and password "(.+)"/ do |email, password|
   fill_in 'Password', with: password
   click_button 'Log in'
 end
+
+
+And /I am enrolled in "(.+)"/ do |course|
+  visit '/'
+  fill_in "Course ID", with: course
+  click_button "Join"
+end
   
   # Make sure that one string (regexp) occurs before or after another one
   #   on the same page
@@ -61,6 +68,19 @@ When /I press the "(.+)" button/ do |button|
   click_button(button)
 end
   
+
+When /I follow my group link "(.+)"/ do |group_id|
+  within("#my-groups-container") do
+    visit group_path(group_id)
+  end
+end
+
+When /I follow class group link "(.+)"/ do |group_id|
+  within("#class-groups-container") do
+    visit group_path(group_id)
+  end
+end
+
   
   ### Utility Steps Just for this assignment.
   

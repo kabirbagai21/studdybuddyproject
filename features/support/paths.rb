@@ -37,6 +37,10 @@ module NavigationHelpers
 
       when /^the sign up page/
         new_student_registration_path
+
+      when /^the group page for "(.+)"/
+        group = Group.find_by(id: $1)
+        group_path(group)
   
       # Add more mappings here.
       # Here is an example that pulls values out of the Regexp:
