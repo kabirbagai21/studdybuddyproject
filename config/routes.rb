@@ -29,7 +29,10 @@ Rails.application.routes.draw do
   end 
 
   resources :group_requests do
-    patch 'approve', on: :member
+    member do
+      patch :approve
+      delete :destroy
+    end
   end
 
   resources :public_profiles, only: [:show]
