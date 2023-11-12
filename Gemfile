@@ -59,6 +59,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mswin mswin64 mingw x64_mingw ]
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
+  gem 'factory_bot_rails' 
 end
 
 group :development do
