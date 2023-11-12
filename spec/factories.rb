@@ -14,4 +14,11 @@ FactoryBot.define do
       association :course
       group_owner_id { FactoryBot.create(:student).id }
     end
+
+    factory :group_request do
+      association :student
+      association :group
+      association :course
+    end
+    
   end
