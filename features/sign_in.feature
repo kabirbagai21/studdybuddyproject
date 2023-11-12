@@ -21,8 +21,9 @@ Scenario: correct login
   When  I fill in "Email" with "kb3343@columbia.edu"
   And   I fill in "Password" with "123456789"
   And   I press the "Log in" button
-  Then  I should be on the profile page for "Kabir Bagai"
+  Then  I should be on the start page for "Kabir Bagai"
   And   I should see "Signed in successfully."
+  And   I should see "Kabir"
 
 Scenario: incorrect login  
   Given I am on the sign in page

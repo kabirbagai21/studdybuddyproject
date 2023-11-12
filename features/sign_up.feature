@@ -24,7 +24,7 @@ Scenario: correct sign up
   And   I fill in "Password" with "123456789"
   And   I fill in "Password confirmation" with "123456789"
   And   I press the "Sign up" button
-  Then  I should be on the profile page for "yuyatng27828@gmail.com"
+  Then  I should be on the start page for "yuyatng27828@gmail.com"
   And   I should see "Welcome! You have signed up successfully."
 
 Scenario: email taken on sign up  

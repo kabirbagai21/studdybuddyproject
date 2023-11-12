@@ -20,6 +20,14 @@ end
 Then /(.*) seed students should exist/ do | n_seeds |
   expect(Student.count).to eq n_seeds.to_i
 end
+
+
+And /I am logged in with email "(.+)" and password "(.+)"/ do |email, password|
+  visit '/'
+  fill_in 'Email', with: email
+  fill_in 'Password', with: password
+  click_button 'Log in'
+end
   
   # Make sure that one string (regexp) occurs before or after another one
   #   on the same page

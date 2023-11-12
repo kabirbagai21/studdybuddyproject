@@ -16,11 +16,13 @@ module NavigationHelpers
       when /^the (StudyBuddy )?home\s?page$/ then '/students'
       #when /^the movies page$/ then '/movies'
 
-      when /^the profile page for "(.+)"/ then '/'
-        #student = Student.find_by(name: $1)
+      when /^the start page for "(.+)"/ then '/'
+
+      when /^the profile page for "(.+)"/
+        student = Student.find_by(name: $1)
         #profile_page_url = student_path(student)
         #puts "Generated URL: #{profile_page_url}"
-        #student_path(student)
+        student_path(student)
 
       when /^the edit page for "(.+)"/
         student = Student.find_by(name: $1)

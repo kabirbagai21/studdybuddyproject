@@ -20,7 +20,7 @@ Scenario: successful sign out
   When  I fill in "Email" with "kb3343@columbia.edu"
   And   I fill in "Password" with "123456789"
   And   I press the "Log in" button
-  Then  I should be on the profile page for "Kabir Bagai"
+  Then  I should be on the start page for "Kabir Bagai"
   And   I should see "Signed in successfully."
   When  I press the "Sign Out" button
   Then  I should be on the sign in page
