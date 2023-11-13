@@ -16,9 +16,31 @@ And /the following courses exist/ do |courses_table|
     Course.create(name: course[:name], course_id: course[:course_id])
   end
 end
+
+And /the following enrollments exist/ do |enrollments_table|
+  enrollments_table.hashes.each do |enrollment|
+    Enrollment.create(student_id: enrollment[:student_id], course_id: enrollment[:course_id])
+  end
+end
+
+And /the following groups exist/ do |groups_table|
+  groups_table.hashes.each do |group|
+    Group.create(group_id: group[:group_id].to_i, course_id: group[:course_id].to_i, group_owner_id: group[:group_owner_id].to_i)
+  end
+end
+
+And /the following group requests exist/ do |group_requests_table|
+  group_requests_table.hashes.each do |group_request|
+    GroupRequest.create(student_id: group_request[:student_id].to_i, course_id: group_request[:course_id].to_i, group_id: group_request[:group_id].to_i)
+  end
+end
   
 Then /(.*) seed students should exist/ do | n_seeds |
   expect(Student.count).to eq n_seeds.to_i
+end
+
+Then /(.*) seed groups should exist/ do | n_seeds |
+  expect(Group.count).to eq n_seeds.to_i
 end
 
 
