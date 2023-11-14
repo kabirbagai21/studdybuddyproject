@@ -73,4 +73,4 @@ end
       expect(group.students).to include(student1, student2)
     end
   end
-end
+
