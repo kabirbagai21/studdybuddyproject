@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :group_requests
     resources :public_profiles, only: [:show]
     patch 'leave', on: :member
+    post 'enroll_student', on: :member
   end 
 
   resources :group_requests do
