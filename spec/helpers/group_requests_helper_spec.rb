@@ -12,12 +12,16 @@ require 'rails_helper'
 # end
 RSpec.describe GroupRequestsHelper, type: :helper do
   describe '#format_request_status' do
-    it 'returns the formatted status for a pending request' do
+    it 'returns "Pending Approval" for pending status' do
       expect(helper.format_request_status('pending')).to eq('Pending Approval')
     end
 
-    it 'returns the formatted status for an approved request' do
+    it 'returns "Approved" for approved status' do
       expect(helper.format_request_status('approved')).to eq('Approved')
+    end
+
+    it 'returns "Unknown Status" for any other status' do
+      expect(helper.format_request_status('rejected')).to eq('Unknown Status')
     end
   end
 end
