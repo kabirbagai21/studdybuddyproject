@@ -29,7 +29,27 @@ describe 'Course' do
     expect(course.groups).to include(group1, group2)
   end
 
+
+  it 'allows creation of groups associated with it' do
+    course = Course.create(name: 'Mathematics')
+    group1 = course.groups.create
+    group2 = course.groups.create
+    expect(course.groups).to include(group1, group2)
+  end
+
+  it 'deletes associated groups when the course is deleted' do
+    course = Course.create(name: 'Philosophy')
+    course.groups.create
+    expect { course.destroy }.to change(Group, :count).by(-1)
+  end
+
+  it 'links students to the course through groups' do
+    course = Course.create(name: 'Computer Science')
+    group = course.groups.create
+    student = Student.create(name: 'Charlie')
+    Enrollment.create(course: course, student: student) # Explicitly link student to course
+    expect(course.students).to include(student)
+  end
 end
 
-
-
+end

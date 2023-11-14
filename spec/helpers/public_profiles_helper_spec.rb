@@ -11,5 +11,13 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe PublicProfilesHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#format_profile_data' do
+    it 'formats the profile data correctly' do
+      profile_data = { name: 'John Doe', email: 'john@example.com' }
+      formatted_data = helper.format_profile_data(profile_data)
+      expect(formatted_data).to eq('Name: John Doe, Email: john@example.com')
+    end
+  end
+
+
 end

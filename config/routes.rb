@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'public_profiles/show'
+  get 'public_profiles/show/:id', to: 'public_profiles#show', as: 'public_profile_show'
   devise_for :students
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -29,7 +29,10 @@ Rails.application.routes.draw do
   end 
 
   resources :group_requests do
-    patch 'approve', on: :member
+    member do
+      patch :approve
+      delete :destroy
+    end
   end
 
   resources :public_profiles, only: [:show]
