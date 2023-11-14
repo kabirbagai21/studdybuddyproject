@@ -46,8 +46,16 @@ describe 'Course' do
   it 'links students to the course through groups' do
     course = Course.create(name: 'Computer Science')
     group = course.groups.create
-    student = Student.create(name: 'Charlie')
-    Enrollment.create(course: course, student: student) # Explicitly link student to course
+
+    student = Student.new(name: 'Charlie', email: 'charlie@example.com', password: 'password123')
+    if student.save
+      expect(student).to be_persisted
+    else
+      raise "Student creation failed: #{student.errors.full_messages.join(", ")}"
+    end
+
+    enrollment = Enrollment.create(course: course, student: student)
+    expect(enrollment).to be_persisted, "Enrollment was not successfully created"
     expect(course.students).to include(student)
   end
 end
