@@ -16,26 +16,28 @@ Background: students in database
   | Engineering SaaS    | 4152        |
   | AP                  | 3157        |
 
-  And I am on the StudyBuddy home page
-  Then 2 seed students should exist
+ And I am logged in with email "yt2749@columbia.edu" and password "123456789"
 
 Scenario: view the enrollment for each student
-  Given I am on the profile page for "Yuya Taniguchi"
-  Then  I should see "No enrolled courses"
+  Given I am on the start page for "Yuya Taniguchi"
+  Then  I should see "Yuya"
+  And   I should see "No enrolled courses"
 
 Scenario: view the enrollment for each course
-  Given I am on the profile page for "Kabir Bagai"
+  Given I am on the start page for "Yuya Taniguchi"
+  Then  I should see "Yuya"
   When  I fill in "Course ID" with "4152"
   And   I press the "Join" button
-  Then  I should be on the profile page for "Kabir Bagai"
+  Then  I should be on the profile page for "Yuya Taniguchi"
   And   I should see "Successfully enrolled in the course."
   And   I should see "Engineering SaaS"
   When  I follow "Engineering SaaS" 
   Then  I should be on the course page for "Engineering SaaS"
-  And   I should see "Kabir Bagai"
+  And   I should see "Yuya Taniguchi"
 
 Scenario: enroll a student in a course
-  Given I am on the profile page for "Yuya Taniguchi"
+  Given I am on the start page for "Yuya Taniguchi"
+  
   When  I fill in "Course ID" with "4152"
   And   I press the "Join" button
   Then  I should be on the profile page for "Yuya Taniguchi"
@@ -43,7 +45,8 @@ Scenario: enroll a student in a course
   And   I should see "Engineering SaaS"
 
 Scenario: enroll a student in an already enrolled course
-  Given I am on the profile page for "Yuya Taniguchi"
+  Given I am on the start page for "Yuya Taniguchi"
+  Then  I should see "Yuya"
   When  I fill in "Course ID" with "3157"
   And   I press the "Join" button
   Then  I should be on the profile page for "Yuya Taniguchi"
@@ -55,7 +58,8 @@ Scenario: enroll a student in an already enrolled course
   And   I should see "You are already enrolled in this course."
 
 Scenario: enroll a student in an invalid course
-  Given I am on the profile page for "Yuya Taniguchi"
+  Given I am on the start page for "Yuya Taniguchi"
+  Then  I should see "Yuya"
   When  I fill in "Course ID" with "0000"
   And   I press the "Join" button
   Then  I should be on the profile page for "Yuya Taniguchi"

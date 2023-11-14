@@ -16,8 +16,12 @@ module NavigationHelpers
       when /^the (StudyBuddy )?home\s?page$/ then '/students'
       #when /^the movies page$/ then '/movies'
 
+      when /^the start page for "(.+)"/ then '/'
+
       when /^the profile page for "(.+)"/
         student = Student.find_by(name: $1)
+        #profile_page_url = student_path(student)
+        #puts "Generated URL: #{profile_page_url}"
         student_path(student)
 
       when /^the edit page for "(.+)"/
@@ -27,6 +31,16 @@ module NavigationHelpers
       when /^the course page for "(.+)"/
         course = Course.find_by(name: $1)
         course_path(course)
+
+      when /^the sign in page/
+        new_student_session_path
+
+      when /^the sign up page/
+        new_student_registration_path
+
+      when /^the group page for "(.+)"/
+        group = Group.find_by(id: $1)
+        group_path(group)
   
       # Add more mappings here.
       # Here is an example that pulls values out of the Regexp:

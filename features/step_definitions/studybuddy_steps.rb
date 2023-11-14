@@ -1,12 +1,13 @@
 # require_relative '../../spec/rails_helper'
 # require_relative '../../spec/spec_helper'
 
+
 # Add a declarative step here for populating the DB with movies.
 Given /the following students exist/ do |students_table|
   students_table.hashes.each do |student|
       # each returned element will be a hash whose key is the table header.
       # you should arrange to add that movie to the database here.
-    Student.create(name: student[:name], email: student[:email], bio: student[:bio])
+    Student.create(name: student[:name], email: student[:email], email_old: student[:email_old], password: student[:password], bio: student[:bio])
   end
 end
 
@@ -15,9 +16,46 @@ And /the following courses exist/ do |courses_table|
     Course.create(name: course[:name], course_id: course[:course_id])
   end
 end
+
+And /the following enrollments exist/ do |enrollments_table|
+  enrollments_table.hashes.each do |enrollment|
+    Enrollment.create(student_id: enrollment[:student_id], course_id: enrollment[:course_id])
+  end
+end
+
+And /the following groups exist/ do |groups_table|
+  groups_table.hashes.each do |group|
+    Group.create(group_id: group[:group_id].to_i, course_id: group[:course_id].to_i, group_owner_id: group[:group_owner_id].to_i)
+  end
+end
+
+And /the following group requests exist/ do |group_requests_table|
+  group_requests_table.hashes.each do |group_request|
+    GroupRequest.create(student_id: group_request[:student_id].to_i, course_id: group_request[:course_id].to_i, group_id: group_request[:group_id].to_i)
+  end
+end
   
 Then /(.*) seed students should exist/ do | n_seeds |
   expect(Student.count).to eq n_seeds.to_i
+end
+
+Then /(.*) seed groups should exist/ do | n_seeds |
+  expect(Group.count).to eq n_seeds.to_i
+end
+
+
+And /I am logged in with email "(.+)" and password "(.+)"/ do |email, password|
+  visit '/'
+  fill_in 'Email', with: email
+  fill_in 'Password', with: password
+  click_button 'Log in'
+end
+
+
+And /I am enrolled in "(.+)"/ do |course|
+  visit '/'
+  fill_in "Course ID", with: course
+  click_button "Join"
 end
   
   # Make sure that one string (regexp) occurs before or after another one
@@ -52,6 +90,19 @@ When /I press the "(.+)" button/ do |button|
   click_button(button)
 end
   
+
+When /I follow my group link "(.+)"/ do |group_id|
+  within("#my-groups-container") do
+    visit group_path(group_id)
+  end
+end
+
+When /I follow class group link "(.+)"/ do |group_id|
+  within("#class-groups-container") do
+    visit group_path(group_id)
+  end
+end
+
   
   ### Utility Steps Just for this assignment.
   
