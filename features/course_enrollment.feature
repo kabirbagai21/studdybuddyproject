@@ -7,9 +7,9 @@ Feature: show and update course enrollment
 Background: students in database
 
   Given the following students exist:
-  | name           | email               | bio      |
-  | Kabir Bagai    | kb3343@columbia.edu | CS Major |
-  | Yuya Taniguchi | yt2749@columbia.edu | CS Major |
+  | name           | email               | email_old           | password  | bio      |
+  | Kabir Bagai    | kb3343@columbia.edu | kb3343@columbia.edu | 123456789 | CS Major |
+  | Yuya Taniguchi | yt2749@columbia.edu | yt2749@columbia.edu | 123456789 | CS Major |
 
   And the following courses exist:
   | name                | course_id   |

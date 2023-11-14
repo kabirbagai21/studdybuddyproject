@@ -1,0 +1,7 @@
+<h1><%= @student.name %></h1>
+<p><%= @student.email %></p>
+<p><%= @student.bio %></p>
+
+<% if @group.present? %>
+<%= link_to 'Return to Group Page', group_path(@group), class: 'btn btn-primary' %>
+<% end %>

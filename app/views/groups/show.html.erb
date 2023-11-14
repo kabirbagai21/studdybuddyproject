@@ -1,9 +1,51 @@
 <h1>Group: <%= @group.group_id %> </h1>
 <h2><%= @course.name %></h2>
 
+<p>Owner: <%= @owner_name %></p>
+
 <h2>Students:</h2>
-<% @members.each do |member| %>
+<% @group.students.each do |student| %>
   <div>
-    <%= link_to member.name, member %>
+    <%= link_to student.name, public_profile_path(student, group_id: @group.id) %>
   </div>
 <% end %>
+
+<% if @group.students.include?(current_student) %>
+  <%= button_to "Leave Group", leave_group_path(@group), method: :patch, data: { confirm: "Are you sure?" } %>
+  <%= button_to "Delete Group", group_path(@group), method: :delete, data: { confirm: "Are you sure?" } %>
+<% end %>
+
+
+
+<% unless @group.students.include?(current_student) %>
+  <%= link_to 'Request to Join Group', new_student_group_request_path(student_id: current_student.id, group_id: @group.id, course_id: @course.id), class: 'btn btn-primary' %>
+<% end %> <br>
+
+<% if current_student.requested_groups.include?(@group) %>
+  <%= button_to 'Cancel Join Request', group_request_path(student_id: current_student.id, group_id: @group.id), method: :delete, data: { confirm: "Are you sure?" } %>
+<% end %> <br>
+
+<% flash.each do |type, msg| %>
+  <div class="alert alert-<%= type %> mt-3">
+    <%= msg %>
+  </div>
+<% end %>
+
+<div class="mb-4">
+<% if @group.students.include?(current_student) %>
+    <h2>Requests:</h2>
+    <ul class="list-requets">
+      <% @requests.each do |request| %>
+        <li class="list-group-item">
+          <%= link_to request.name, public_profile_path(request, group_id: @group.id) %>
+          <%= button_to "Approve Request", approve_group_request_path(@group, student_id: request), method: :patch %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<div class="mb-3">
+<%= link_to 'Return to Course Page', course_path(@course), class: 'btn btn-primary' %>
+</div>
+

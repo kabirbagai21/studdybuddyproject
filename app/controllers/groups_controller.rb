@@ -1,9 +1,64 @@
 class GroupsController < ApplicationController
     def show
         @group = Group.find(params[:id])
-        @members = @group.students
         @course = @group.course
+        @owner_name = Student.find(@group.group_owner_id).name
+        @requests = @group.requesting_students
     end 
+
+    def new
+      @course = Course.find(params[:course_id])
+
+      if Group.where(group_owner_id: current_student.id, course_id: @course.id).exists?
+        flash[:alert] = "You cannot create more than one group in a course."
+        redirect_to course_path(@course)
+        return
+      elsif Group.where(course_id: @course.id).joins(:students).where(students: { id: current_student.id }).exists?
+        flash[:alert] = "You are already in a group. Please leave the group you are in to create a new one."
+        redirect_to course_path(@course)
+        return
+      elsif current_student.requested_groups.where(course: @course).exists?
+        flash[:alert] = "You cannot create a group if you have requested to join another group in this course"
+        redirect_to course_path(@course)
+        return
+      end
+
+      @group = @course.groups.new
+      @group.group_owner_id = current_student.id
+      @group.students << current_student
+      @group.save
+      redirect_to course_path(@course)
+    end
+
+    def leave
+      group = Group.find(params[:id])
+      course = Course.find(group.course_id)
+      if current_student.id = group.group_owner_id
+        new_owner = group.students.where.not(id: current_student.id).sample
+        if new_owner
+          group.update(group_owner_id: new_owner.id)
+        else
+          current_student.groups.delete(group)
+          group.destroy
+          redirect_to course_path(course)
+          return 
+        end
+      end
+      current_student.groups.delete(group)
+      redirect_to group_path(group), notice: 'You have left the group.'
+    end 
+
+    def destroy
+      @group = Group.find(params[:id])
+      @course = Course.find(@group.course_id)
+      @group.students.each do |student|
+        student.groups.delete(@group)
+      end
+      @group.destroy
+  
+      flash[:notice] = 'Group deleted successfully.'
+      redirect_to course_path(@course)
+    end
     
     def enroll_student
         group = Group.find(params[:group_id])
@@ -16,4 +71,5 @@ class GroupsController < ApplicationController
           redirect_to group, alert: 'Group is full. Cannot enroll.'
         end
     end
+
 end

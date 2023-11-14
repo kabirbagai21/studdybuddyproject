@@ -1,3 +1,10 @@
+<% if student_signed_in? %>
+<%= button_to "Sign Out", destroy_student_session_path, method: :delete %> 
+<% else %>
+<%= link_to 'Sign Up', new_student_registration_path %>
+<%= link_to 'Sign In', new_student_session_path %>
+<% end %>
+
 <div class="student-profile">
   <h1 class="course-name"><%= @student.name %></h1>
   <h2><%= @student.email %></h2>
@@ -20,6 +27,11 @@
     <% end %>
   </div>
 
+  <% flash.each do |type, msg| %>
+    <div class="alert alert-<%= type %> mt-3">
+      <%= msg %>
+    </div>
+  <% end %>
 
   <div class="enroll-course-form mt-3">
     <%= form_with(url: enroll_student_path(@student), method: :post) do |form| %>
@@ -31,9 +43,4 @@
     <% end %>
   </div>
 
-  <% flash.each do |type, msg| %>
-    <div class="alert alert-<%= type %> mt-3">
-      <%= msg %>
-    </div>
-  <% end %>
 </div>

@@ -13,12 +13,13 @@ The application is live at: [StudyBuddy on Heroku](https://stark-headland-66813-
 - Sayef Iqbal (si2400)
 - Yuya Taniguchi (yt2749)
 
-## Features
+## Current Features
 
-- Course Enrollment: Students can browse and enroll in courses relevant to their studies.
-- Group Collaboration: Enables students to join groups for collaborative study sessions.
-- Availability Viewing: Students can view the availability of groups to plan their study schedules.
+- Course Enrollment: Students can enroll in courses relevant to their studies using a course code (for example use 4152 or 3157).
+- Group Collaboration: Enables students to view classmates and groups in courses they're enrolled in.
+- Student Profile: Students can create and edit a profile with relevant info
 
+Note: The "Add Student" functionality has not yet been implemented
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -69,3 +70,84 @@ To deploy this on a live system, ensure all environment variables are set on the
 - **RSpec Tests**: Test files are in the `spec` folder.
 
 
+# User Registration 
+
+## Devise
+https://www.digitalocean.com/community/tutorials/how-to-set-up-user-authentication-with-devise-in-a-rails-7-application
+
+## Devise setup from scratch
+
+#### Install necessary gems
+
+```
+gem 'bcrypt', '~> 3.1.7' # For password hashing
+gem 'devise', '~> 4.8'   # For user authentication
+```
+
+#### Generate Devise configuration
+```
+rails generate devise:install
+```
+This will create a configuration file at config/initializers/devise.rb. 
+
+#### Generate migration file for Student model using devise
+```
+rails generate devise Student
+```
+
+#### Update `app/models/student.rb`
+```
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+```
+
+#### Create views for registrations
+```
+rails generate devise:views
+```
+
+#### Update `config/routes.rb`
+```
+devise_for :students
+```
+
+#### Add necessary `sign_in/sign_up/sign_out` options
+Open show.html.erb file under Student view and add it in the beginning of the file
+```
+<% if student_signed_in? %>
+<%= button_to "Sign Out", destroy_student_session_path, method: :delete %> 
+<% else %>
+<%= link_to 'Sign Up', new_student_registration_path %>
+<%= link_to 'Sign In', new_student_session_path %>
+<% end %>
+```
+
+#### Update controller
+Add the following block in the controller to show sign in page before the show.html.erb file is rendered
+```
+before_action :authenticate_student!, only: [:show]
+```
+
+## Devise usage (Registration)
+
+### Install necessary gems
+```
+gem 'bcrypt', '~> 3.1.7' # For password hashing
+gem 'devise', '~> 4.8'   # For user authentication
+```
+
+```
+bundle install
+```
+
+### Run db migrations
+```
+rails db:create
+rails db:migrate
+rails db:seed
+```
+
+### Run the app
+```
+rails server
+```

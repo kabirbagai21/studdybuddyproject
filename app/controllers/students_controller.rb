@@ -1,13 +1,14 @@
 class StudentsController < ApplicationController
-  
+
+  before_action :authenticate_student!, only: [:show]
+
   def index
     @students = Student.all
   end
 
   def show
-    @student = Student.find(params[:id])
+    @student = Student.find(current_student.id)
     @enrolled_courses = @student.courses
-    
   end
 
   def edit
@@ -19,7 +20,6 @@ class StudentsController < ApplicationController
     @student.update(student_params)
     redirect_to student_path(@student)
   end
-
 
   def enroll
     course_id = params[:course_id]

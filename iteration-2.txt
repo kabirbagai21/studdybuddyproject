@@ -13,14 +13,14 @@ Register
 Login
 Student create Profile
 
-After login, we should see students private profile, 
+After login, we should see students private profile, (done)
 
 Student enrolls in a course (how he/she gets code is for later) (Done)
 Stduent gets enrolled in class (Done)
 
-Students sees the list of classes they are enrolled in
+Students sees the list of classes they are enrolled in (done)
 
-Once you enroll in a class you should then only be able to see groups. Not before that.
+Once you enroll in a class you should then only be able to see groups. Not before that. (done)
 
 View for Class
 
@@ -32,7 +32,7 @@ Note: (DB Change) Create a group-request table to store which student requested 
 Class
  - Groups
     - Group
-      - Members -> Links to Student profile (public/private), current we have only private and is accessible if you login. For public we should be able to query the student table and retrieve students public info and show them in memebers page.
+      - Members -> Links to Student profile (public/private), current we have only private and is accessible if you login. For public we should be able to query the student table and retrieve students public info and show them in memebers page. (Done)
       - Request to join a group
 
       - Need to create group owner column in groups which will be the student id who created the group. Only that student can accept the request.
@@ -43,4 +43,27 @@ Class
 
 
 Important: A student cannot join 2 groups at same time. They will have to leave a group and then join another. 
+
+11/8
+Delete group
+Remove group members
+join group requests
+leave group
+add course column to group table
+
+
+Sayef
+UI
+More fields for user profile
+
+Yuya
+Cucumber Tests
+
+Brian
+RSpec 
+UI
+
+Kabir 
+new features
+
 
