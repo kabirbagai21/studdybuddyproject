@@ -43,6 +43,10 @@ Then /(.*) seed groups should exist/ do | n_seeds |
   expect(Group.count).to eq n_seeds.to_i
 end
 
+Then /(.*) seed group requests should exist/ do | n_seeds |
+  expect(GroupRequest.count).to eq n_seeds.to_i
+end
+
 
 And /I am logged in with email "(.+)" and password "(.+)"/ do |email, password|
   visit '/'

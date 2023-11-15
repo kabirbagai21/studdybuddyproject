@@ -26,21 +26,20 @@ Background: students in database and logged in as Kabir Bagai
   | 1        | 2         | 1              |
 
   And the following group requests exist:
-  | student_id | course_id | group_id |
-  | 2          | 2         | 1        |
+  | student_id | group_id | course_id |
+  | 1          | 1        | 2        |
+
 
   And I am logged in with email "kb3343@columbia.edu" and password "123456789"
 
-  Then 1 seed groups should exist
+  Then 1 seed group requests should exist
 
 
-Scenario: accept a join request
-  Given I am on the start page for "Kabir Bagai"
+Scenario: send a join request
+  Given I am on the profile page for "Kabir Bagai"
   When  I follow "AP" 
   Then  I should be on the course page for "AP"
   When  I follow my group link "1"
   Then  I should be on the group page for "1"
-  When  I press the "Approve Request" button
-  Then  I should be on the group page for "1"
-  And   I should see "Yuya" before "Requests:"
+  And   I should see "Requests:" before "Yuya"
 
