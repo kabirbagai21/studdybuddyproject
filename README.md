@@ -24,7 +24,6 @@ The application is live at: [StudyBuddy on Heroku](https://quiet-stream-84389-6a
 - Leave/Delete group
 - Updated UI
 
-Note: The "Add Student" functionality has not yet been implemented
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
