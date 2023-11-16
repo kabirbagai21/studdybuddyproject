@@ -4,7 +4,7 @@ StudyBuddy is a collaborative platform designed to help students find study, hom
 
 ## Live Application
 
-The application is live at: [StudyBuddy on Heroku](https://stark-headland-66813-685e9c0117bd.herokuapp.com)
+The application is live at: [StudyBuddy on Heroku](https://quiet-stream-84389-6ae62200e85e.herokuapp.com/students/sign_in)
 
 ## Team members:
 
