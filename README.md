@@ -15,9 +15,14 @@ The application is live at: [StudyBuddy on Heroku](https://quiet-stream-84389-6a
 
 ## Current Features
 
+- Login and Signup page
 - Course Enrollment: Students can enroll in courses relevant to their studies using a course code (for example use 4152 or 3157).
-- Group Collaboration: Enables students to view classmates and groups in courses they're enrolled in.
 - Student Profile: Students can create and edit a profile with relevant info
+- Course Page: Students can view the groups in the course as well as the groups they are in
+- Create/Join Group: Students can create new group and request to join
+- Approve Requests: Group Owners can approve requests for students to join their group
+- Leave/Delete group
+- Updated UI
 
 Note: The "Add Student" functionality has not yet been implemented
 ## Getting Started
