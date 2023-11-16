@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+body {
+  background-image: url('https://images.saymedia-content.com/.image/t_share/MTc4NzM1OTc4MzE0MzQzOTM1/how-to-create-cool-website-backgrounds-the-ultimate-guide.png'); 
+  background-size: cover;
+}
+
