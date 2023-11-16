@@ -41,13 +41,37 @@ RSpec.describe StudentsController, type: :controller do
     end
   end
 
-   describe 'POST #enroll' do
+  describe 'POST #enroll' do
     context 'when the course does not exist' do
       it 'redirects to the student show page with an alert' do
         post :enroll, params: { id: student.id, course_id: 0 }
-
         expect(response).to redirect_to(student_path(student))
         expect(flash[:alert]).to eq('Invalid Course ID. Please try again.')
+      end
+    end
+
+    context 'when the student is already enrolled in the course' do
+      it 'redirects with a notice indicating already enrolled' do
+        enrolled_course.update(course_id: 123) # Example course_id
+        student.courses << enrolled_course
+        student.save
+
+        post :enroll, params: { id: student.id, course_id: 123 }
+
+        expect(response).to redirect_to(student_path(student))
+        expect(flash.to_hash).to include('notice' => 'You are already enrolled in this course.')
+      end
+    end
+
+    context 'when the student is not already enrolled in the course' do
+      it 'enrolls the student and redirects with a success notice' do
+        course.update(course_id: 456) # Example course_id
+        post :enroll, params: { id: student.id, course_id: 456 }
+
+        student.reload
+        expect(response).to redirect_to(student_path(student))
+        expect(student.courses).to include(course)
+        expect(flash.to_hash).to include('notice' => 'Successfully enrolled in the course.')
       end
     end
   end
