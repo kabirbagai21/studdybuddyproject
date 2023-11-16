@@ -8,6 +8,8 @@ require 'cucumber/rails'
 require_relative 'paths'
 require 'rspec/expectations'
 require 'capybara/cucumber'
+require 'simplecov'
+SimpleCov.start 'rails'
 
 # frozen_string_literal: true
 
