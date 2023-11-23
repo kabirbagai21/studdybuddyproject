@@ -1,0 +1,39 @@
+<section style="background-color: #eee;">
+
+<div class="container py-5">
+<div class="container mt-5">
+<h2 class="mb-4">Edit Course</h2>
+<%= form_for @course, method: :put, class: 'border p-4 rounded' do |f| %>
+    <div class="mb-3">
+      <%= f.label :name, 'Name', class: 'form-label' %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+  
+    <div class="mb-3">
+      <%= f.label :course_code, 'Course code (ex: COMS 4152)', class: 'form-label' %>
+      <%= f.text_field :course_code, class: 'form-control' %>
+    </div>
+  
+    <div class="mb-3">
+      <%= f.label :section, 'Section',  class: 'form-label'%>
+      <%= f.number_field :section, class: 'form-control' %>
+    </div>
+  
+    <div class="mb-3">
+      <%= f.label :semester, 'Semester'%>
+      <%= f.select :semester, ['Fall', 'Spring', 'Summer'], class: 'form-control' %>
+    </div>
+  
+    <div class="mb-3">
+      <%= f.label :year, 'Year'%>
+      <%= f.select :year, ['2023', '2024', '2025', '2026'], class: 'form-control' %>
+    </div>
+    
+    <%= f.submit 'Update Course Info', class: 'btn btn-primary mt-2 transition-hover' %>
+<% end %>
+  
+
+<%= button_to "Delete Course", course_path(@course), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger mr-2 float-right" %>
+</div>
+</div>
+</section>

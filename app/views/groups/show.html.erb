@@ -21,10 +21,12 @@
 <% end %>
 
 
-
-<% unless @group.students.include?(current_student) %>
-  <%= link_to 'Request to Join Group', new_student_group_request_path(student_id: current_student.id, group_id: @group.id, course_id: @course.id), class: 'btn btn-primary' %>
-<% end %> <br>
+<% unless current_student.instructor %>
+  <% unless @group.students.include?(current_student) %>
+    <%= link_to 'Request to Join Group', new_student_group_request_path(student_id: current_student.id, group_id: @group.id, course_id: @course.id), class: 'btn btn-primary' %>
+  <% end %> 
+<%end%>
+<br>
 
 <% if current_student.requested_groups.include?(@group) %>
   <%= button_to 'Cancel Join Request', group_request_path(student_id: current_student.id, group_id: @group.id), method: :delete, data: { confirm: "Are you sure?" } %>
