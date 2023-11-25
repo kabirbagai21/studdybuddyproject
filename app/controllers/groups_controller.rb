@@ -3,6 +3,8 @@ class GroupsController < ApplicationController
         @group = Group.find(params[:id])
         @course = @group.course
         @owner_name = Student.find(@group.group_owner_id).name
+        @enrollment = @group.students.count
+        @is_full = (@group.students.count == @course.max_group_size)
         @requests = @group.requesting_students
     end 
 
@@ -51,6 +53,7 @@ class GroupsController < ApplicationController
     def destroy
       @group = Group.find(params[:id])
       @course = Course.find(@group.course_id)
+      @group.group_requests.destroy_all
       @group.students.each do |student|
         student.groups.delete(@group)
       end

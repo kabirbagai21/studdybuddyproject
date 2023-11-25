@@ -8,6 +8,8 @@
 
 <p>Owner: <%= @owner_name %></p>
 
+<p>Enrollment: <%= @enrollment.to_s + '/' + @course.max_group_size.to_s %></p>
+
 <h2>Students:</h2>
 <% @group.students.each do |student| %>
   <div>
@@ -21,15 +23,19 @@
 <% end %>
 
 
-<% unless current_student.instructor %>
-  <% unless @group.students.include?(current_student) %>
-    <%= link_to 'Request to Join Group', new_student_group_request_path(student_id: current_student.id, group_id: @group.id, course_id: @course.id), class: 'btn btn-primary' %>
-  <% end %> 
+<% unless current_student.instructor%>
+  <% unless @is_full %>
+    <% unless @group.students.include?(current_student) %>
+      <%= link_to 'Request to Join Group', new_student_group_request_path(student_id: current_student.id, group_id: @group.id, course_id: @course.id), class: 'btn btn-primary' %>
+    <% end %> 
+  <%end%>
 <%end%>
 <br>
 
 <% if current_student.requested_groups.include?(@group) %>
-  <%= button_to 'Cancel Join Request', group_request_path(student_id: current_student.id, group_id: @group.id), method: :delete, data: { confirm: "Are you sure?" } %>
+  <%unless @is_full%>
+    <%= button_to 'Cancel Join Request', group_request_path(student_id: current_student.id, group_id: @group.id), method: :delete, data: { confirm: "Are you sure?" } %>
+  <%end%>
 <% end %> <br>
 
 <% flash.each do |type, msg| %>
@@ -39,16 +45,19 @@
 <% end %>
 
 <div class="mb-4">
-<% if @group.students.include?(current_student) %>
-    <h2>Requests:</h2>
-    <ul class="list-requets">
-      <% @requests.each do |request| %>
-        <li class="list-group-item">
-          <%= link_to request.name, public_profile_path(request, group_id: @group.id) %>
-          <%= button_to "Approve Request", approve_group_request_path(@group, student_id: request), method: :patch %>
-        </li>
-      <% end %>
-    </ul>
+<% unless @is_full %>
+  <% if @group.students.include?(current_student)%>
+      <h2>Requests:</h2>
+      <ul class="list-requets">
+        <% @requests.each do |request| %>
+          <li class="list-group-item">
+            <%= link_to request.name, public_profile_path(request, group_id: @group.id) %>
+            <%= button_to "Approve Request", approve_group_request_path(@group, student_id: request), method: :patch %>
+            <%= button_to "Deny Request", group_request_path(group_id: @group.id, student_id: request), method: :delete %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
   <% end %>
 </div>
 

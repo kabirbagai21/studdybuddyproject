@@ -23,7 +23,7 @@ class Group < ApplicationRecord
 
   # Validation method to check if a student already owns a group
   def one_group_per_student
-    if Group.where(group_owner_id: group_owner_id).exists?
+    if Group.where(group_owner_id: group_owner_id, course_id: course_id).exists?
       errors.add(:group_owner_id, "can't create more than one group")
     end
   end
