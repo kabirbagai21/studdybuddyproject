@@ -34,24 +34,22 @@
     <h6 class="border-bottom pb-2 mb-0">My Groups</h6>
     <div class="d-flex text-muted pt-3">
       <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="28" height="26" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-      <div>
-        <ul class="list-group">
-          <% @user_groups.each do |g| %>
+      <%if @user_group%>
+        <div>
+          <ul class="list-group">
+              <li class="d-block text-gray-dark ml-3">
+                <%= link_to "#{@user_group.group_id}: #{@user_group.students.pluck(:name).join(', ')}", @user_group %>
+              </li>
+          </ul>
+        </div>
+        <div class="ml-auto">
+          <ul class="list-group">
             <li class="d-block text-gray-dark ml-3">
-            <%= link_to "#{g.group_id}: #{g.students.pluck(:name).join(', ')}", g %>
+              <p><%= @user_group.students.count.to_s + '/' + @course.max_group_size.to_s %></p>
             </li>
-          <% end %>
-        </ul>
-      </div>
-      <div class="ml-auto">
-        <ul class="list-group">
-          <% @user_groups.each do |g| %>
-            <li class="d-block text-gray-dark ml-3">
-              <p><%= g.students.count.to_s + '/' + @course.max_group_size.to_s %></p>
-            </li>
-          <% end %>
-        </ul>
-      </div>
+          </ul>
+        </div>
+      <% end %>
     </div>
   </div>
 <% end %>
@@ -65,7 +63,9 @@
           <li class="d-block text-gray-dark ml-3">
             <%= link_to "#{group.group_id}: #{group.students.pluck(:name).join(', ')}", group %> 
             <% if current_student.requested_groups.include?(group) %>
-              <p>Requested</p>
+              <p>Requested to Join</p>
+            <%elsif @user_group and @user_group.requested_groups.include?(group) %>
+              <p>Requested to Merge</p>
             <% end %>
           </li>
         <% end %>

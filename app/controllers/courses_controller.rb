@@ -5,7 +5,7 @@ class CoursesController < ApplicationController
         @course = Course.find(params[:id])
         @enrolled_students = @course.students
         @groups = @course.groups
-        @user_groups = current_student.groups.where(course: @course)
+        @user_group = current_student.groups.find_by(course: @course)
         @instructor = Student.find_by(id: @course.instructor_id)
         @student = current_student
     end

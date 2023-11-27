@@ -42,7 +42,7 @@
 
 <% if current_student.requested_groups.include?(@group) %>
   <%unless @is_full%>
-    <%= button_to 'Cancel Join Request', group_request_path(student_id: current_student.id, group_id: @group.id), method: :delete, data: { confirm: "Are you sure?" } %>
+    <%= button_to 'Cancel Join Request', group_request_path(student_id: current_student.id, group_id: @group.id), method: :delete, data: { confirm: "Are you sure?" },  class: 'btn btn-primary' %>
   <%end%>
 <% elsif @current_student_group and @current_student_group.requested_groups.include?(@group) %>
   <%unless @is_full%>
