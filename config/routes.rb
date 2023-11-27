@@ -18,18 +18,27 @@ Rails.application.routes.draw do
   resources :courses do
     resources :enrollments
     resources :groups
+    resources :merge_group_requests
     resources :group_requests
   end
 
   resources :groups do 
     resources :group_members
     resources :group_requests
+    resources :merge_group_requests
     resources :public_profiles, only: [:show]
     patch 'leave', on: :member
     post 'enroll_student', on: :member
   end 
 
   resources :group_requests do
+    member do
+      patch :approve
+      delete :destroy
+    end
+  end
+
+  resources :merge_group_requests do
     member do
       patch :approve
       delete :destroy

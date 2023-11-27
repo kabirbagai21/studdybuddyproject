@@ -4,6 +4,7 @@ class Course < ApplicationRecord
   has_many :students, through: :enrollments
   has_many :groups, dependent: :destroy #ensures that when a course is deleted, all associated groups are also automatically deleted
   has_many :group_requests, dependent: :destroy
+  has_many :merge_group_requests, dependent: :destroy
 
   validates_uniqueness_of :name, scope: [:section, :instructor_id], message: 'This class and section already exist for the instructor.'
 

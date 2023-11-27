@@ -3,9 +3,11 @@ class GroupsController < ApplicationController
         @group = Group.find(params[:id])
         @course = @group.course
         @owner_name = Student.find(@group.group_owner_id).name
+        @current_student_group = current_student.groups.find_by(course_id: @course.id)
         @enrollment = @group.students.count
         @is_full = (@group.students.count == @course.max_group_size)
         @requests = @group.requesting_students
+        @merge_requests = @group.requesting_groups
     end 
 
     def new
@@ -35,7 +37,7 @@ class GroupsController < ApplicationController
     def leave
       group = Group.find(params[:id])
       course = Course.find(group.course_id)
-      if current_student.id = group.group_owner_id
+      if current_student.id == group.group_owner_id
         new_owner = group.students.where.not(id: current_student.id).sample
         if new_owner
           group.update(group_owner_id: new_owner.id)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_22_214121) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_26_000238) do
   create_table "courses", force: :cascade do |t|
     t.string "name"
     t.string "course_id"
@@ -65,6 +65,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_22_214121) do
     t.index ["group_owner_id"], name: "index_groups_on_group_owner_id"
   end
 
+  create_table "merge_group_requests", force: :cascade do |t|
+    t.integer "group_requesting_id", null: false
+    t.integer "group_to_merge_id", null: false
+    t.integer "course_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_merge_group_requests_on_course_id"
+    t.index ["group_requesting_id"], name: "index_merge_group_requests_on_group_requesting_id"
+    t.index ["group_to_merge_id"], name: "index_merge_group_requests_on_group_to_merge_id"
+  end
+
   create_table "students", force: :cascade do |t|
     t.string "name"
     t.string "email_old"
@@ -91,4 +102,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_22_214121) do
   add_foreign_key "group_requests", "students"
   add_foreign_key "groups", "courses"
   add_foreign_key "groups", "students", column: "group_owner_id"
+  add_foreign_key "merge_group_requests", "courses"
+  add_foreign_key "merge_group_requests", "groups", column: "group_requesting_id"
+  add_foreign_key "merge_group_requests", "groups", column: "group_to_merge_id"
 end

@@ -8,8 +8,17 @@ class Group < ApplicationRecord
   has_many :students, through: :group_members
 
   #Group-request association
-  has_many :group_requests
+  has_many :group_requests, dependent: :destroy
   has_many :requesting_students, through: :group_requests, source: :student
+
+  #Merge Group-request association
+  has_many :merge_group_requests, foreign_key: :group_to_merge_id , dependent: :destroy
+  has_many :requesting_groups, through: :merge_group_requests, source: :group_requesting
+
+  has_many :merge_group_requests_as_target, foreign_key: :group_requesting_id, class_name: 'MergeGroupRequest', dependent: :destroy
+  has_many :requested_groups, through: :merge_group_requests_as_target, source: :group_to_merge
+
+
   # Validation to ensure one group per student
   validate :one_group_per_student, on: :create
 
