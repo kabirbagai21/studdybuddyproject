@@ -1,5 +1,5 @@
 class Group < ApplicationRecord
-  before_create :set_group_id
+  #before_create :set_group_id
   before_create :set_sequential_id # New method for setting sequential_id
   after_destroy :reassign_sequential_ids # New method for recalculating sequential_id after a group is destroyed
 

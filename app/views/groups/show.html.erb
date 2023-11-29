@@ -3,7 +3,7 @@
 <div class="container py-5">
 <div class="container mt-5">
 
-<h1>Group: <%= @group.group_id %> </h1>
+<h1>Group: <%= @group.sequential_id %> </h1>
 <h2><%= @course.name %></h2>
 
 <p>Owner: <%= @owner_name %></p>
@@ -72,7 +72,7 @@
       <ul class="list-merge-requests">
         <% @merge_requests.each do |request| %>
           <li class="list-group-item">
-            <%= link_to "#{request.group_id}: #{request.students.pluck(:name).join(', ')}", request %>
+            <%= link_to "#{request.sequential_id}: #{request.students.pluck(:name).join(', ')}", request %>
             <%= button_to "Approve Merge Request", approve_merge_group_request_path(group_requesting_id: request.id, group_to_merge_id: @group.id, course_id: @course.id), method: :patch %>
             <%= button_to 'Deny Merge Request', merge_group_request_path(group_requesting_id: request.id, group_to_merge_id: @group.id, course_id: @course.id), method: :delete %>
           </li>

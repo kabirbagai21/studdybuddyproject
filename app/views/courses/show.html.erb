@@ -38,7 +38,7 @@
         <div>
           <ul class="list-group">
               <li class="d-block text-gray-dark ml-3">
-                <%= link_to "#{@user_group.group_id}: #{@user_group.students.pluck(:name).join(', ')}", @user_group %>
+                <%= link_to "#{@user_group.sequential_id}: #{@user_group.students.pluck(:name).join(', ')}", @user_group %>
               </li>
           </ul>
         </div>
@@ -61,7 +61,7 @@
       <ul class="list-group">
         <% @groups.each do |group| %>
           <li class="d-block text-gray-dark ml-3">
-            <%= link_to "#{group.group_id}: #{group.students.pluck(:name).join(', ')}", group %> 
+            <%= link_to "#{group.sequential_id}: #{group.students.pluck(:name).join(', ')}", group %> 
             <% if current_student.requested_groups.include?(group) %>
               <p>Requested to Join</p>
             <%elsif @user_group and @user_group.requested_groups.include?(group) %>
