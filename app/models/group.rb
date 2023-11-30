@@ -23,6 +23,8 @@ class Group < ApplicationRecord
   # Validation to ensure one group per student
   validate :one_group_per_student, on: :create
 
+  attr_accessor :destroyed_for_merge # New attribute to track if destruction is for merge
+
   private
 
   # Automatically sets a unique group ID before creating a new group
