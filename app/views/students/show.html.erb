@@ -1,12 +1,5 @@
 <section style="background-color: #eee;">
 <div class="container py-5">
-<% if student_signed_in? %>
-<%= button_to "Sign Out", destroy_student_session_path, method: :delete, class: 'btn btn-danger mr-2' %> 
-<% else %>
-<%= link_to 'Sign Up', new_student_registration_path, class: 'btn btn-primary mr-2' %>
-<%= link_to 'Sign In', new_student_session_path, class: 'btn btn-secondary' %>
-<% end %>
-
 <br />
 
 <% unless @student.instructor %>
@@ -39,36 +32,34 @@
     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
       class="rounded-circle img-fluid" style="width: 150px;">
     <h5 class="my-3"><%= @student.name %></h5>
-    <p class="text-muted mb-1"><%= @student.bio %></p>
-    <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
     <div class="d-flex justify-content-center mb-2">
-      <button type="button" class="btn btn-outline-primary ms-1">    <%= link_to 'Edit Profile', edit_student_path(@student)%></button>
+      <%= link_to 'Edit Profile', edit_student_path(@student), class: "btn btn-outline-primary ms-1"%>
     </div>
   </div>
 </div>
 <div class="card mb-4 mb-lg-0">
   <div class="card-body p-0">
     <ul class="list-group list-group-flush rounded-3">
+      <% if @student.linked_in_profile.present? %>
+        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+        <p class="mb-0 grayed-out-text" style="color: #999;"><%= @student.linked_in_profile %></p>
+        </li>
+      <% end %>
+      <% if @student.facebook_profile.present? %>
       <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-        <i class="fas fa-globe fa-lg text-warning"></i>
-        <p class="mb-0">https://personal-website.com</p>
+      <p class="mb-0 grayed-out-text" style="color: #999;"><%= @student.facebook_profile %></p>
       </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-        <i class="fab fa-github fa-lg" style="color: #333333;"></i>
-        <p class="mb-0">LinkedIn</p>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-        <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-        <p class="mb-0">Facebook</p>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-        <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-        <p class="mb-0">item1</p>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-        <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-        <p class="mb-0">item2</p>
-      </li>
+    <% end %>
+    <% if @student.personal_website.present? %>
+    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+    <p class="mb-0 grayed-out-text" style="color: #999;"><%= @student.personal_website %></p>
+    </li>
+  <% end %>
+  <% if @student.github_profile.present? %>
+  <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+  <p class="mb-0 grayed-out-text" style="color: #999;"><%= @student.github_profile %></p>
+  </li>
+<% end %>
     </ul>
   </div>
 </div>
@@ -94,32 +85,16 @@
               </div>
             </div>
             <hr>
+            <% if !@student.instructor %>
             <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Phone</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">(097) 234-5678</p>
-              </div>
+            <div class="col-sm-3">
+              <p class="mb-0">Skills</p>
             </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Mobile</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">(098) 765-4321</p>
-              </div>
+            <div class="col-sm-9">
+              <p class="mb-0"><%= @student.interests %></p>
             </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <p class="mb-0">Address</p>
-              </div>
-              <div class="col-sm-9">
-                <p class="text-muted mb-0">Bay Area, San Francisco, CA</p>
-              </div>
-            </div>
+          </div>
+          <%end%>
           </div>
         </div>
         <div class="row">
@@ -131,17 +106,17 @@
                 <% if @student.instructor %>
                   <% if @courses_taught.present? %>
                     <% @courses_taught.each do |course| %>
-                      <div class="course-name mb-2">
+                      <div class="course-name mb-2 d-flex justify-content-between align-items-center">
                         <%= link_to course.name.strip + " " + course.semester + " " + course.year.to_s, course %>
-                        <p class="mb-4 text-right"> Join Code: <%= course.course_id %> </p>
+                        <p class="mb-0"> Join Code: <%= course.course_id %> </p>
                       </div>
                     <% end %>
                   <% else %>
                     <p class="text-muted">No created courses</p>
                   <% end %>
-                  <button type="button" class="btn btn-outline-primary ms-1">
-                  <%= link_to 'Create New Course', new_course_path(instructor_id: @student.id) %>
-                </button>
+                  <br />
+                  <%= link_to 'Create New Course', new_course_path(instructor_id: @student.id), class: "btn btn-outline-primary ms-1" %>
+ 
                 <% end %>
 
                 <% unless @student.instructor %>

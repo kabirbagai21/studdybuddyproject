@@ -3,23 +3,51 @@
 <div class="container py-5">
 <div class="container mt-5">
 
-<h1>Group: <%= @group.group_id %> </h1>
-<h2><%= @course.name %></h2>
-
-<p>Owner: <%= @owner_name %></p>
-
-<p>Enrollment: <%= @enrollment.to_s + '/' + @course.max_group_size.to_s %></p>
-
-<h2>Students:</h2>
-<% @group.students.each do |student| %>
-  <div>
-    <%= link_to student.name, public_profile_path(student, group_id: @group.id) %>
+<main class="container">
+  <div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm" style="background-color: #fff;">
+    <img class="me-3">
+    <div class="lh-1">
+      <h1 class="h3 mb-0 text-dark lh-1">Group: <%= @group.group_id %></h1>
+      <br />
+      <h1 class="h6 mb-0 text-dark lh-1">Course <%= @course.name %></h1>
+    </div>
   </div>
-<% end %>
 
-<% if @group.students.include?(current_student) %>
-  <%= button_to "Leave Group", leave_group_path(@group), method: :patch, data: { confirm: "Are you sure?" } %>
-  <%= button_to "Delete Group", group_path(@group), method: :delete, data: { confirm: "Are you sure?" } %>
+
+  <div class="my-3 p-3 bg-body rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mb-0">Owner</h6>
+      <div class="d-flex text-muted pt-3">
+      <p><%= @owner_name %></p>
+      </div>
+  </div>
+
+
+  <div class="my-3 p-3 bg-body rounded shadow-sm">
+  <h6 class="border-bottom pb-2 mb-0">Enrollment status</h6>
+    <div class="d-flex text-muted pt-3">
+    <p>Enrollment: <%= @enrollment.to_s + '/' + @course.max_group_size.to_s %></p>
+    </div>
+  </div>
+
+  <div class="my-3 p-3 bg-body rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mb-0">Enrolled Students</h6>
+      <div class="d-flex text-muted pt-3">
+        <p class="pb-3 mb-0 small lh-sm border-bottom">
+          <ul class="list-group">
+            <% @group.students.each do |student| %>
+            <div>
+              <%= link_to student.name, public_profile_path(student, group_id: @group.id) %>
+            </div>
+            <% end %>
+          </ul>
+        </p>
+      </div>
+  </div>
+
+  <% if @group.students.include?(current_student) %>
+  <%= button_to "Leave Group", leave_group_path(@group), method: :patch, data: { confirm: "Are you sure?" }, class: 'btn btn-warning', id: 'confirmButton' %>
+  <br />
+  <%= button_to "Delete Group", group_path(@group), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
 <% end %>
 
 
@@ -42,11 +70,11 @@
 
 <% if current_student.requested_groups.include?(@group) %>
   <%unless @is_full%>
-    <%= button_to 'Cancel Join Request', group_request_path(student_id: current_student.id, group_id: @group.id), method: :delete, data: { confirm: "Are you sure?" },  class: 'btn btn-primary' %>
+    <%= button_to 'Cancel Join Request', group_request_path(student_id: current_student.id, group_id: @group.id), method: :delete, data: { confirm: "Are you sure?" },  class: 'btn btn-warning' %>
   <%end%>
 <% elsif @current_student_group and @current_student_group.requested_groups.include?(@group) %>
   <%unless @is_full%>
-<%= button_to 'Cancel Merge Request', merge_group_request_path(group_requesting_id: @current_student_group.id, group_to_merge_id: @group.id, course_id: @course.id), method: :delete, class: 'btn btn-primary' %>
+<%= button_to 'Cancel Merge Request', merge_group_request_path(group_requesting_id: @current_student_group.id, group_to_merge_id: @group.id, course_id: @course.id), method: :delete, class: 'btn btn-warning' %>
   <%end%>
 <% end %> <br>
 
@@ -64,17 +92,20 @@
         <% @requests.each do |request| %>
           <li class="list-group-item">
             <%= link_to request.name, public_profile_path(request, group_id: @group.id) %>
-            <%= button_to "Approve Request", approve_group_request_path(@group, student_id: request), method: :patch %>
-            <%= button_to "Deny Request", group_request_path(group_id: @group.id, student_id: request), method: :delete %>
+            <%= button_to "Approve Request", approve_group_request_path(@group, student_id: request), method: :patch, class: 'btn btn-success' %>
+            <%= button_to "Deny Request", group_request_path(group_id: @group.id, student_id: request), method: :delete , class: 'btn btn-danger'%>
           </li>
         <% end %>
       </ul>
       <ul class="list-merge-requests">
         <% @merge_requests.each do |request| %>
           <li class="list-group-item">
-            <%= link_to "#{request.group_id}: #{request.students.pluck(:name).join(', ')}", request %>
-            <%= button_to "Approve Merge Request", approve_merge_group_request_path(group_requesting_id: request.id, group_to_merge_id: @group.id, course_id: @course.id), method: :patch %>
-            <%= button_to 'Deny Merge Request', merge_group_request_path(group_requesting_id: request.id, group_to_merge_id: @group.id, course_id: @course.id), method: :delete %>
+  
+            Request from <%= link_to "#{request.group_id}: #{request.students.pluck(:name).join(', ')}", request %>
+
+            <%= button_to "Approve Merge Request", approve_merge_group_request_path(group_requesting_id: request.id, group_to_merge_id: @group.id, course_id: @course.id), method: :patch, class: 'btn btn-success' %>
+            <br />
+            <%= button_to 'Deny Merge Request', merge_group_request_path(group_requesting_id: request.id, group_to_merge_id: @group.id, course_id: @course.id), method: :delete , class: 'btn btn-danger' %>
           </li>
         <% end %>
       </ul>
@@ -82,11 +113,25 @@
   <% end %>
 </div>
 
+<br />
+
 <div class="mb-3">
 <%= link_to 'Return to Course Page', course_path(@course), class: 'btn btn-primary' %>
+
+<%= link_to "My Profile", root_path, class: "btn btn-primary float-right" %>
+
 </div>
+</main>
+
+
+
+
 
 </div>
 </div>
 </div>
 </section>
+
+
+
+

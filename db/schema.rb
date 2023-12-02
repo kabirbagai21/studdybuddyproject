@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_26_000238) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_29_000124) do
   create_table "courses", force: :cascade do |t|
     t.string "name"
     t.string "course_id"
@@ -61,6 +61,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_26_000238) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "group_owner_id"
+    t.integer "sequential_id"
     t.index ["course_id"], name: "index_groups_on_course_id"
     t.index ["group_owner_id"], name: "index_groups_on_group_owner_id"
   end
@@ -88,6 +89,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_26_000238) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.boolean "instructor"
+    t.string "linked_in_profile"
+    t.string "facebook_profile"
+    t.string "personal_website"
+    t.string "github_profile"
+    t.string "interests"
+    t.string "address"
     t.index ["email"], name: "index_students_on_email", unique: true
     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
   end
