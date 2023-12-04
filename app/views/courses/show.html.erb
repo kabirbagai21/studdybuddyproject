@@ -75,13 +75,22 @@
       <ul class="list-group">
         <% @groups.each do |group| %>
           <li class="d-block text-gray-dark ml-3">
-            <p><%= group.students.count.to_s + '/' + @course.max_group_size.to_s %></p>
+            <%= group.students.count.to_s + '/' + @course.max_group_size.to_s %>
           </li>
         <% end %>
       </ul>
     </div>
   </div>
 </div>
+
+<% unless @student.instructor %>
+    <%= link_to 'Create New Group', new_course_group_path(@course), class: 'btn btn-primary' %>
+  <%end%>
+  <%= link_to "My Profile", root_path, class: "btn btn-primary float-right" %>
+
+  <% if @student.instructor? %>
+    <%= link_to 'Edit Course', edit_course_path, class: "btn btn-primary float-left" %>
+  <%end%>
 
 </main>
 
@@ -91,14 +100,6 @@
       <%= msg %>
     </div>
   <% end %>
-  <% unless @student.instructor %>
-    <%= link_to 'Create New Group', new_course_group_path(@course), class: 'btn btn-primary' %>
-  <%end%>
-  <%= link_to "My Profile", root_path, class: "btn btn-primary float-right" %>
-
-  <% if @student.instructor? %>
-    <%= link_to 'Edit Course', edit_course_path, class: "btn btn-primary float-left" %>
-  <%end%>
 
   </div>
   </div>

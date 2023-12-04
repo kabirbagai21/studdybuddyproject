@@ -15,7 +15,29 @@
     <%= label :student, :bio, 'Bio', class: 'form-label' %>
     <%= text_area :student, 'bio', class: 'form-control', rows: 3 %>
   </div>
+  <div class="mb-3">
+    <%= label :student, :linked_in_profile, 'Linkedin', class: 'form-label' %>
+    <%= text_field :student, 'linked_in_profile', class: 'form-control', placeholder: "Optional" %>
+  </div>
+  <div class="mb-3">
+  <%= label :student, :facebook_profile, 'Facebook', class: 'form-label' %>
+  <%= text_field :student, 'facebook_profile', class: 'form-control', placeholder: "Optional" %>
+  </div>
+  <div class="mb-3">
+  <%= label :student, :personal_website, 'Personal website', class: 'form-label' %>
+  <%= text_field :student, 'personal_website', class: 'form-control', placeholder: "Optional" %>
+  </div>
+  <div class="mb-3">
+  <%= label :student, :github_profile, 'Github profile', class: 'form-label' %>
+  <%= text_field :student, 'github_profile', class: 'form-control', placeholder: "Optional" %>
+  </div>
 
+  <% if !@student.instructor %>
+  <div class="mb-3">
+  <%= label :student, :skills, 'Skills', class: 'form-label' %>
+  <%= text_field :student, 'skills', class: 'form-control', placeholder: "Optional" %>
+  </div>
+  <% end %>
   <%= submit_tag 'Update Profile Info', class: 'btn btn-primary mt-2 transition-hover' %>
 <% end %>
 

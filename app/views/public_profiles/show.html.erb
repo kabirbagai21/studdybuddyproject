@@ -1,7 +1,84 @@
-<h1><%= @student.name %></h1>
-<p><%= @student.email %></p>
-<p><%= @student.bio %></p>
+<section style="background-color: #eee;">
+<div class="container py-5">
+<br />
+
+<div class="row">
+  <div class="col-lg-4">
+    <div class="card mb-4">
+      <div class="card-body text-center">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+          class="rounded-circle img-fluid" style="width: 150px;">
+          <h5 class="my-3"><%= @student.name %></h5>
+          <p><%= @student.email %></p>
+      </div>
+    </div>
+    <div class="card mb-4 mb-lg-0">
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush rounded-3">
+          <% if @student.linked_in_profile.present? %>
+            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+              <p class="mb-0 grayed-out-text" style="color: #999;"><%= @student.linked_in_profile %></p>
+            </li>
+          <% end %>
+          <% if @student.facebook_profile.present? %>
+            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+              <p class="mb-0 grayed-out-text" style="color: #999;"><%= @student.facebook_profile %></p>
+            </li>
+          <% end %>
+          <% if @student.personal_website.present? %>
+            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+              <p class="mb-0 grayed-out-text" style="color: #999;"><%= @student.personal_website %></p>
+            </li>
+          <% end %>
+          <% if @student.github_profile.present? %>
+            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+              <p class="mb-0 grayed-out-text" style="color: #999;"><%= @student.github_profile %></p>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+<div class="col-lg-8">
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-3">
+          <p class="mb-0">Full Name</p>
+        </div>
+        <div class="col-sm-9">
+          <p class="mb-0"><%= @student.name %></p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-sm-3">
+          <p class="mb-0">Email</p>
+        </div>
+        <div class="col-sm-9">
+          <p class="mb-0"><%= @student.email %></p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-sm-3">
+          <p class="mb-0">Skills</p>
+        </div>
+        <div class="col-sm-9">
+          <p class="mb-0"><%= @student.skills %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
 
 <% if @group.present? %>
-<%= link_to 'Return to Group Page', group_path(@group), class: 'btn btn-primary' %>
+<br/>
+<%= link_to 'Return to Group Page', group_path(@group), class: 'btn btn-primary float-left' %>
 <% end %>
+<%= link_to "Return to my Profile", root_path, class: "btn btn-primary float-right" %>
+
+</section>
+
