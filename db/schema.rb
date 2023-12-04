@@ -10,12 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_10_215347) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_26_000238) do
   create_table "courses", force: :cascade do |t|
     t.string "name"
     t.string "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "course_code"
+    t.integer "max_group_size", default: 4, null: false
+    t.integer "instructor_id"
+    t.integer "year"
+    t.string "section"
+    t.string "semester"
+    t.index ["instructor_id"], name: "index_courses_on_instructor_id"
   end
 
   create_table "enrollments", force: :cascade do |t|
@@ -58,6 +65,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_10_215347) do
     t.index ["group_owner_id"], name: "index_groups_on_group_owner_id"
   end
 
+  create_table "merge_group_requests", force: :cascade do |t|
+    t.integer "group_requesting_id", null: false
+    t.integer "group_to_merge_id", null: false
+    t.integer "course_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_merge_group_requests_on_course_id"
+    t.index ["group_requesting_id"], name: "index_merge_group_requests_on_group_requesting_id"
+    t.index ["group_to_merge_id"], name: "index_merge_group_requests_on_group_to_merge_id"
+  end
+
   create_table "students", force: :cascade do |t|
     t.string "name"
     t.string "email_old"
@@ -69,10 +87,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_10_215347) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.boolean "instructor"
     t.index ["email"], name: "index_students_on_email", unique: true
     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "courses", "students", column: "instructor_id"
   add_foreign_key "enrollments", "courses"
   add_foreign_key "enrollments", "students"
   add_foreign_key "group_members", "groups"
@@ -82,4 +102,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_10_215347) do
   add_foreign_key "group_requests", "students"
   add_foreign_key "groups", "courses"
   add_foreign_key "groups", "students", column: "group_owner_id"
+  add_foreign_key "merge_group_requests", "courses"
+  add_foreign_key "merge_group_requests", "groups", column: "group_requesting_id"
+  add_foreign_key "merge_group_requests", "groups", column: "group_to_merge_id"
 end

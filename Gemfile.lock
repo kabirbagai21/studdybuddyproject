@@ -76,6 +76,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.5)
       public_suffix (>= 2.0.2, < 6.0)
+    allow_numeric (0.1.0)
     autoprefixer-rails (10.4.15.0)
       execjs (~> 2)
     base64 (0.1.1)
@@ -357,6 +358,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  allow_numeric
   bcrypt (~> 3.1.7)
   bootsnap
   bootstrap (~> 5.0.2)

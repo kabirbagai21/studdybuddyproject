@@ -22,8 +22,20 @@ class GroupRequestsController < ApplicationController
         @group = Group.find(params[:id]) 
         @course = Course.find(@group.course_id)
         @student = Student.find(params[:student_id])
+
+        if @group.requested_groups.count >= 1
+            redirect_to group_path(@group), notice: "You cannot add students when requesting to merge with another group"
+            return
+        end 
+
         @group.students << @student
         GroupRequest.where(student: @student, course: @course).destroy_all
+        @num_students = @group.students.count
+        if(@num_students >= @course.max_group_size)
+            GroupRequest.where(group: @group, course: @course).destroy_all
+            redirect_to group_path(@group), notice: "Group is now full"
+            return
+        end
         redirect_to group_path(@group)
     end
 

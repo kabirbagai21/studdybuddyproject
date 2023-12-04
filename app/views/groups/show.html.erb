@@ -3,10 +3,12 @@
 <div class="container py-5">
 <div class="container mt-5">
 
-<h1>Group: <%= @group.group_id %> </h1>
+<h1>Group: <%= @group.sequential_id %> </h1>
 <h2><%= @course.name %></h2>
 
 <p>Owner: <%= @owner_name %></p>
+
+<p>Enrollment: <%= @enrollment.to_s + '/' + @course.max_group_size.to_s %></p>
 
 <h2>Students:</h2>
 <% @group.students.each do |student| %>
@@ -21,13 +23,31 @@
 <% end %>
 
 
-
-<% unless @group.students.include?(current_student) %>
-  <%= link_to 'Request to Join Group', new_student_group_request_path(student_id: current_student.id, group_id: @group.id, course_id: @course.id), class: 'btn btn-primary' %>
-<% end %> <br>
+<% unless current_student.instructor%>
+  <% unless @is_full %>
+    <% unless @group.students.include?(current_student) %>
+     <% if @current_student_group%>
+      <% unless @current_student_group.requested_groups.include?(@group) %>
+        <%= link_to 'Request to Merge Groups', new_merge_group_request_path(group_requesting_id: @current_student_group.id, group_to_merge_id: @group.id, course_id: @course.id), class: 'btn btn-primary' %>
+      <% end %>
+     <%else%>
+      <% unless current_student.requested_groups.include?(@group) %>
+        <%= link_to 'Request to Join Group', new_student_group_request_path(student_id: current_student.id, group_id: @group.id, course_id: @course.id), class: 'btn btn-primary' %>
+      <%end%>    
+    <% end %> 
+    <%end%>
+  <%end%>
+<%end%>
+<br>
 
 <% if current_student.requested_groups.include?(@group) %>
-  <%= button_to 'Cancel Join Request', group_request_path(student_id: current_student.id, group_id: @group.id), method: :delete, data: { confirm: "Are you sure?" } %>
+  <%unless @is_full%>
+    <%= button_to 'Cancel Join Request', group_request_path(student_id: current_student.id, group_id: @group.id), method: :delete, data: { confirm: "Are you sure?" },  class: 'btn btn-primary' %>
+  <%end%>
+<% elsif @current_student_group and @current_student_group.requested_groups.include?(@group) %>
+  <%unless @is_full%>
+<%= button_to 'Cancel Merge Request', merge_group_request_path(group_requesting_id: @current_student_group.id, group_to_merge_id: @group.id, course_id: @course.id), method: :delete, class: 'btn btn-primary' %>
+  <%end%>
 <% end %> <br>
 
 <% flash.each do |type, msg| %>
@@ -37,16 +57,28 @@
 <% end %>
 
 <div class="mb-4">
-<% if @group.students.include?(current_student) %>
-    <h2>Requests:</h2>
-    <ul class="list-requets">
-      <% @requests.each do |request| %>
-        <li class="list-group-item">
-          <%= link_to request.name, public_profile_path(request, group_id: @group.id) %>
-          <%= button_to "Approve Request", approve_group_request_path(@group, student_id: request), method: :patch %>
-        </li>
-      <% end %>
-    </ul>
+<% unless @is_full %>
+  <% if @group.students.include?(current_student)%>
+      <h2>Requests:</h2>
+      <ul class="list-requests">
+        <% @requests.each do |request| %>
+          <li class="list-group-item">
+            <%= link_to request.name, public_profile_path(request, group_id: @group.id) %>
+            <%= button_to "Approve Request", approve_group_request_path(@group, student_id: request), method: :patch %>
+            <%= button_to "Deny Request", group_request_path(group_id: @group.id, student_id: request), method: :delete %>
+          </li>
+        <% end %>
+      </ul>
+      <ul class="list-merge-requests">
+        <% @merge_requests.each do |request| %>
+          <li class="list-group-item">
+            <%= link_to "#{request.sequential_id}: #{request.students.pluck(:name).join(', ')}", request %>
+            <%= button_to "Approve Merge Request", approve_merge_group_request_path(group_requesting_id: request.id, group_to_merge_id: @group.id, course_id: @course.id), method: :patch %>
+            <%= button_to 'Deny Merge Request', merge_group_request_path(group_requesting_id: request.id, group_to_merge_id: @group.id, course_id: @course.id), method: :delete %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
   <% end %>
 </div>
 

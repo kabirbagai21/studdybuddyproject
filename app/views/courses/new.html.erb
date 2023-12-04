@@ -1,0 +1,53 @@
+
+<section style="background-color: #eee;">
+
+<div class="container py-5">
+<div class="container mt-5">
+<h1>New Course</h1>
+
+<%= form_for @course, url: courses_path(instructor_id: @instructor.id) do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control', required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :course_code, 'Course Code (ex: COMS 4152)'%>
+    <%= f.text_field :course_code, class: 'form-control', required: true %>
+  </div>
+
+  <div class="form-group">
+  <%= f.label :section, 'Section'%>
+  <%= f.text_field :section, class: 'form-control', type: 'number'%>
+  </div>
+
+  <div class="form-group">
+  <%= f.label :semester, 'Semester'%>
+  <%= f.select :semester, ['Fall', 'Spring', 'Summer']%>
+  </div>
+
+  <div class="form-group">
+  <%= f.label :year, 'Year'%>
+  <%= f.select :year, ['2023', '2024', '2025', '2026']%>
+  </div>
+
+
+  <div class="form-group">
+    <%= f.label :max_group_size %>
+    <%= f.text_field :max_group_size, class: 'form-control', type: 'number', required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit 'Create Course', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<% if @course.errors.any? %>
+  <div id="error_explanation">
+    <% @course.errors.messages_for(:name).each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', root_path %>

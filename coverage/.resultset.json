@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/sayefiqbal/CS/group-project/new/studdybuddyproject/app/models/student.rb": {
+      "/Users/kabirbagai/Desktop/studdybuddy/project/app/models/student.rb": {
         "lines": [
           1,
           null,
@@ -24,26 +24,26 @@
           null
         ]
       },
-      "/Users/sayefiqbal/CS/group-project/new/studdybuddyproject/app/models/application_record.rb": {
+      "/Users/kabirbagai/Desktop/studdybuddy/project/app/models/application_record.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/Users/sayefiqbal/CS/group-project/new/studdybuddyproject/app/helpers/application_helper.rb": {
+      "/Users/kabirbagai/Desktop/studdybuddy/project/app/helpers/application_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/sayefiqbal/CS/group-project/new/studdybuddyproject/app/helpers/courses_helper.rb": {
+      "/Users/kabirbagai/Desktop/studdybuddy/project/app/helpers/courses_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/sayefiqbal/CS/group-project/new/studdybuddyproject/app/helpers/group_requests_helper.rb": {
+      "/Users/kabirbagai/Desktop/studdybuddy/project/app/helpers/group_requests_helper.rb": {
         "lines": [
           1,
           1,
@@ -59,13 +59,13 @@
           null
         ]
       },
-      "/Users/sayefiqbal/CS/group-project/new/studdybuddyproject/app/helpers/groups_helper.rb": {
+      "/Users/kabirbagai/Desktop/studdybuddy/project/app/helpers/groups_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/sayefiqbal/CS/group-project/new/studdybuddyproject/app/helpers/public_profiles_helper.rb": {
+      "/Users/kabirbagai/Desktop/studdybuddy/project/app/helpers/public_profiles_helper.rb": {
         "lines": [
           1,
           1,
@@ -75,21 +75,13 @@
           null
         ]
       },
-      "/Users/sayefiqbal/CS/group-project/new/studdybuddyproject/app/helpers/students_helper.rb": {
+      "/Users/kabirbagai/Desktop/studdybuddy/project/app/helpers/students_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/sayefiqbal/CS/group-project/new/studdybuddyproject/app/channels/application_cable/channel.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          null
-        ]
-      },
-      "/Users/sayefiqbal/CS/group-project/new/studdybuddyproject/app/channels/application_cable/connection.rb": {
+      "/Users/kabirbagai/Desktop/studdybuddy/project/app/channels/application_cable/channel.rb": {
         "lines": [
           1,
           1,
@@ -97,7 +89,15 @@
           null
         ]
       },
-      "/Users/sayefiqbal/CS/group-project/new/studdybuddyproject/app/controllers/courses_controller.rb": {
+      "/Users/kabirbagai/Desktop/studdybuddy/project/app/channels/application_cable/connection.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/kabirbagai/Desktop/studdybuddy/project/app/controllers/courses_controller.rb": {
         "lines": [
           1,
           1,
@@ -109,13 +109,13 @@
           null
         ]
       },
-      "/Users/sayefiqbal/CS/group-project/new/studdybuddyproject/app/controllers/application_controller.rb": {
+      "/Users/kabirbagai/Desktop/studdybuddy/project/app/controllers/application_controller.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/Users/sayefiqbal/CS/group-project/new/studdybuddyproject/app/controllers/group_requests_controller.rb": {
+      "/Users/kabirbagai/Desktop/studdybuddy/project/app/controllers/group_requests_controller.rb": {
         "lines": [
           1,
           1,
@@ -156,7 +156,7 @@
           null
         ]
       },
-      "/Users/sayefiqbal/CS/group-project/new/studdybuddyproject/app/controllers/groups_controller.rb": {
+      "/Users/kabirbagai/Desktop/studdybuddy/project/app/controllers/groups_controller.rb": {
         "lines": [
           1,
           1,
@@ -235,7 +235,7 @@
           null
         ]
       },
-      "/Users/sayefiqbal/CS/group-project/new/studdybuddyproject/app/controllers/students_controller.rb": {
+      "/Users/kabirbagai/Desktop/studdybuddy/project/app/controllers/students_controller.rb": {
         "lines": [
           1,
           null,
@@ -287,7 +287,7 @@
           null
         ]
       },
-      "/Users/sayefiqbal/CS/group-project/new/studdybuddyproject/app/models/course.rb": {
+      "/Users/kabirbagai/Desktop/studdybuddy/project/app/models/course.rb": {
         "lines": [
           1,
           1,
@@ -297,7 +297,7 @@
           null
         ]
       },
-      "/Users/sayefiqbal/CS/group-project/new/studdybuddyproject/app/models/enrollment.rb": {
+      "/Users/kabirbagai/Desktop/studdybuddy/project/app/models/enrollment.rb": {
         "lines": [
           1,
           1,
@@ -306,7 +306,7 @@
           null
         ]
       },
-      "/Users/sayefiqbal/CS/group-project/new/studdybuddyproject/app/models/group.rb": {
+      "/Users/kabirbagai/Desktop/studdybuddy/project/app/models/group.rb": {
         "lines": [
           1,
           null,
@@ -341,7 +341,7 @@
           null
         ]
       },
-      "/Users/sayefiqbal/CS/group-project/new/studdybuddyproject/app/jobs/application_job.rb": {
+      "/Users/kabirbagai/Desktop/studdybuddy/project/app/jobs/application_job.rb": {
         "lines": [
           1,
           null,
@@ -352,7 +352,7 @@
           null
         ]
       },
-      "/Users/sayefiqbal/CS/group-project/new/studdybuddyproject/app/mailers/application_mailer.rb": {
+      "/Users/kabirbagai/Desktop/studdybuddy/project/app/mailers/application_mailer.rb": {
         "lines": [
           1,
           1,
@@ -360,7 +360,7 @@
           null
         ]
       },
-      "/Users/sayefiqbal/CS/group-project/new/studdybuddyproject/app/models/group_request.rb": {
+      "/Users/kabirbagai/Desktop/studdybuddy/project/app/models/group_request.rb": {
         "lines": [
           1,
           1,
@@ -377,7 +377,7 @@
           null
         ]
       },
-      "/Users/sayefiqbal/CS/group-project/new/studdybuddyproject/app/models/group_member.rb": {
+      "/Users/kabirbagai/Desktop/studdybuddy/project/app/models/group_member.rb": {
         "lines": [
           1,
           1,
@@ -385,7 +385,7 @@
           null
         ]
       },
-      "/Users/sayefiqbal/CS/group-project/new/studdybuddyproject/app/controllers/public_profiles_controller.rb": {
+      "/Users/kabirbagai/Desktop/studdybuddy/project/app/controllers/public_profiles_controller.rb": {
         "lines": [
           1,
           1,
@@ -396,6 +396,6 @@
         ]
       }
     },
-    "timestamp": 1700104400
+    "timestamp": 1700104896
   }
 }

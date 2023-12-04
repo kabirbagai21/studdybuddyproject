@@ -9,6 +9,11 @@ class StudentsController < ApplicationController
   def show
     @student = Student.find(current_student.id)
     @enrolled_courses = @student.courses
+
+    if @student.instructor?
+      @courses_taught = Course.where(instructor_id: @student.id).all
+    end
+
   end
 
   def edit
