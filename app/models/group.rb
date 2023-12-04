@@ -1,5 +1,5 @@
 class Group < ApplicationRecord
-  before_create :set_group_id
+  #before_create :set_group_id
   before_create :set_sequential_id # New method for setting sequential_id
   after_destroy :reassign_sequential_ids # New method for recalculating sequential_id after a group is destroyed
 
@@ -22,6 +22,8 @@ class Group < ApplicationRecord
 
   # Validation to ensure one group per student
   validate :one_group_per_student, on: :create
+
+  attr_accessor :destroyed_for_merge # New attribute to track if destruction is for merge
 
   private
 
