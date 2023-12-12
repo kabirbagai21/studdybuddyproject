@@ -1,7 +1,7 @@
 FactoryBot.define do
     factory :student do
       sequence(:name) { |n| "John Doe #{n}" }
-      sequence(:email) { |n| "john#{n}@example.com" }
+      sequence(:email) { |n| "john#{n}@columbia.edu" }
       password { "password" }
       bio { "Student Bio" }
     end
