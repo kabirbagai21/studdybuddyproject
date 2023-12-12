@@ -1,35 +1,32 @@
 require 'rails_helper'
-require_relative '../app/models/student.rb'
-require 'rails_helper'
 
 RSpec.describe Student, type: :model do
-  # Check the proper attributes provided
   it "contains valid attributes" do
-    student = Student.new(name: "John Doe", email_old: "john@example.com", email: "john@example.com", password: '123456', bio: "A bio.", created_at: Time.now, updated_at: Time.now)
+    student = Student.new(name: "John Doe", email: "john@columbia.edu", password: '123456', bio: "A bio.")
     expect(student).to be_valid
   end
 
-  # Check if student profile can be updated
   it "can allow to update profile" do
-    student = Student.new(name: "John Doe", email_old: "john@example.com", email: "john@example.com", password: '123456', bio: "A bio.", created_at: Time.now, updated_at: Time.now)
+    student = FactoryBot.create(:student)
     student.update(bio: "Another bio.")
     expect(student.bio).to eq("Another bio.")
-  end 
+  end
 
   it 'can have many enrollments' do
-    student = Student.new(name: 'Jane Smith', email_old: 'jane.smith@example.com', email: 'jane.smith@example.com', password: '123456', created_at: Time.now, updated_at: Time.now)
-    enrollment1 = student.enrollments.build(course_id: 1)
-    enrollment2 = student.enrollments.build(course_id: 2)
-    expect(student.enrollments).to include(enrollment1, enrollment2)
+    student = FactoryBot.create(:student)
+    course1 = FactoryBot.create(:course)
+    course2 = FactoryBot.create(:course)
+    Enrollment.create(course: course1, student: student)
+    Enrollment.create(course: course2, student: student)
+    expect(student.enrollments.count).to eq(2)
   end
 
   it 'can have many courses through enrollments' do
-    student = Student.new(name: 'Bob Johnson', email_old: 'bob.johnson@example.com', email: 'bob.johnson@example.com', password: '123456', created_at: Time.now, updated_at: Time.now)
-    course1 = Course.create(name: 'Math')
-    course2 = Course.create(name: 'Science')
+    student = FactoryBot.create(:student)
+    course1 = FactoryBot.create(:course)
+    course2 = FactoryBot.create(:course)
     student.courses << course1
     student.courses << course2
     expect(student.courses).to include(course1, course2)
   end
-
 end
