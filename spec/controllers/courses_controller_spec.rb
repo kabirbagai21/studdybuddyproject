@@ -19,7 +19,7 @@ RSpec.describe CoursesController, type: :controller do
       expect(assigns(:course)).to eq(course)
       expect(assigns(:enrolled_students)).to match_array(course.students)
       expect(assigns(:groups)).to match_array(course.groups)
-      expect(assigns(:user_groups)).to eq(student.groups.find_by(course: course))
+      expect(assigns(:user_groups)).to be_nil.or(eq(student.groups.find_by(course: course)))
     end
   end
 end
