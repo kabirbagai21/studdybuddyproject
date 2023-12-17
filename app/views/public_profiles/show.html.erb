@@ -68,6 +68,16 @@
           <p class="mb-0"><%= @student.skills %></p>
         </div>
       </div>
+      <hr>
+      <div class="row">
+        <div class="col-sm-3">
+          <p class="mb-0">Enrolled Courses</p>
+        </div>
+        <div class="col-sm-9">
+          <p class="mb-0"><%= @courses.pluck(:name).join(', ') %></p>
+        </div>
+      </div>
+      <hr>
     </div>
   </div>
 </div>
