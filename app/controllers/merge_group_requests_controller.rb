@@ -48,10 +48,15 @@ class MergeGroupRequestsController < ApplicationController
         @requesting_group = Group.find(params[:group_requesting_id])
         @group_to_merge = Group.find(params[:group_to_merge_id])
         @request = MergeGroupRequest.find_by(group_requesting_id: @requesting_group.id, group_to_merge_id: @group_to_merge.id, course: params[:course_id])
-        @request.destroy
-        flash[:notice] = 'Request Canceled.'
-        redirect_to group_path(@group_to_merge)
-    end
+        if @request
+          @request.destroy
+          flash[:notice] = 'Request Canceled.'
+          redirect_to group_path(@group_to_merge)
+        else
+          # Redirect to the root path if the merge request does not exist
+          redirect_to root_path, alert: 'Merge request not found.'
+        end
+      end
 
     
 end
