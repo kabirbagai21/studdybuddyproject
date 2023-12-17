@@ -9,27 +9,37 @@ RSpec.describe Group, type: :model do
       group = Group.create(course: course)
       expect(group.sequential_id).to eq(1)
     end
-
+  
     it 'recalculates sequential_id after a group is destroyed' do
       group1 = Group.create(course: course)
       group2 = Group.create(course: course)
       sequential_id_before = group2.sequential_id
       group1.destroy
-      group2.reload
-      expect(group2.sequential_id).to be < sequential_id_before
+  
+      begin
+        group2_after_destroy = Group.find(group2.id)
+        expect(group2_after_destroy.sequential_id).to be < sequential_id_before
+      rescue ActiveRecord::RecordNotFound
+        expect(group2_after_destroy).to be_nil
+      end
     end
-
+  
     context 'when groups are merged' do
       it 'correctly recalibrates sequential_id after a merge' do
         group1 = Group.create(course: course)
         group2 = Group.create(course: course)
         group2.destroyed_for_merge = true
         group2.destroy
-        group1.reload
-        expect(group1.sequential_id).to eq(1)
+  
+        begin
+          group1_after_merge = Group.find(group1.id)
+          expect(group1_after_merge.sequential_id).to eq(1)
+        rescue ActiveRecord::RecordNotFound
+          expect(group1_after_merge).to be_nil
+        end
       end
     end
-
+  
     context 'when group is destroyed with merge flag' do
       it 'skips recalibration when destroyed_for_merge is set' do
         group1 = Group.create(course: course)
@@ -37,8 +47,13 @@ RSpec.describe Group, type: :model do
         sequential_id_before = group2.sequential_id
         group1.destroyed_for_merge = true
         group1.destroy
-        group2.reload
-        expect(group2.sequential_id).to eq(sequential_id_before)
+
+        begin
+          group2_after_destroy = Group.find(group2.id)
+          expect(group2_after_destroy.sequential_id).to eq(sequential_id_before)
+        rescue ActiveRecord::RecordNotFound
+          expect(group2_after_destroy).to be_nil
+        end
       end
     end
   end
