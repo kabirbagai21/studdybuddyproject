@@ -63,9 +63,9 @@
           <li class="d-block text-gray-dark ml-3">
             <%= link_to "#{group.sequential_id}: #{group.students.pluck(:name).join(', ')}", group %> 
             <% if current_student.requested_groups.include?(group) %>
-              <p>Requested to Join</p>
+              Requested to Join
             <%elsif @user_group and @user_group.requested_groups.include?(group) %>
-              <p>Requested to Merge</p>
+              Requested to Merge
             <% end %>
           </li>
         <% end %>
