@@ -101,5 +101,3 @@ RSpec.describe GroupsController, type: :controller do
     end
   end
 end
-
-end
