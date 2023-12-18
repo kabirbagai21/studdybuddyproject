@@ -31,6 +31,7 @@ The application is live at: [StudyBuddy on Heroku](https://quiet-stream-84389-6a
 - Signup: Fill in the necessary fields on the signup page. If you are an instructor check the "Are you an instructor box.
 - Course creation: When signed in as an instructor, click the "Create New Course" button and fill in fields. Once the course is created, the instructor can also edit the fields by clicking the "Edit Course" button on the course page.
 - Join Code: On the instructor's profile page, make note of the join code for the class you just created. Copy the code to the clipboard
+- Edit Profile: Students can edit their profile by clicking the "Edit Profile" button on their profile page.
 - Joining a course: When signed in as a student, paste the join code into the "Join Course" textbox. Doing so will enroll the student in a course
 - Creating a group: When logged in as a student, click the "Create new group" button on the course page. You can leave or delete the group as well.
 - Public profiles: Click on the student's name in the group to view their public profile. 
@@ -38,7 +39,14 @@ The application is live at: [StudyBuddy on Heroku](https://quiet-stream-84389-6a
 - Approving a join request: If you are a member of a group, you can see and approve all join requests for your group. 
 - Merge requests: Follow the same process for approving/denying as join requests. Once a merge request is approved, all students from the requesting group will be added to the requested group.
 
-
+Note: there is some seed data that exists. Here is the login info 
+Password (for all users): 123456789
+Students
+Email: kb3343@columbia.edu 
+       yt2749@columbia.edu
+       si2400@columbia.edu
+Instructors:
+Email: jy2324@columbia.edu
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
