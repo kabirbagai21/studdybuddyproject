@@ -1,7 +1,7 @@
-Feature: join a study group
+Feature: accept a join request
 
   As a student
-  I want to join a study/project group
+  I want to accept a study/project group join request
 
 
 Background: students in database and logged in as Yuya Taniguchi
@@ -24,17 +24,26 @@ And the following courses exist:
   | group_id | course_id | group_owner_id |
   | 1        | 1         | 1              |
 
+  And the following group members exist:
+  | student_id | group_id |
+  | 1          | 1        |
 
-  And I am logged in with email "yt2749@columbia.edu" and password "123456789"
+  And the following group requests exist:
+  | student_id | group_id | course_id |
+  | 2          | 1        | 1         |
+
+  Then 1 seed group requests should exist
+  And  2 seed enrollments should exist
+
+  And I am logged in with email "kb3343@columbia.edu" and password "123456789"
 
 
-
-Scenario: send a join request
-  Given I am on the profile page for "Yuya Taniguchi"
+Scenario: accept a join request
+  Given I am on the profile page for "Kabir Bagai"
   When  I follow "AP" 
   Then  I should be on the course page for "AP"
-  When  I follow class group link "1"
+  When  I follow my group link "1"
   Then  I should be on the group page for "1"
-  And   I should see "Owner" before "Kabir"
-  When  I follow "Request to Join Group"
-  Then  I should see "Requested to Join"
+  And   I should see "Requests"
+  When  I press "Approve Request"
+  Then  I should see "Enrollment: 2/4"

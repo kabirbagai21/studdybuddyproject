@@ -1,10 +1,10 @@
-Feature: join a study group
+Feature: send merge group request
 
   As a student
-  I want to join a study/project group
+  I want to request to merge two groups into one
 
 
-Background: students in database and logged in as Yuya Taniguchi
+Background: students in database and logged in as Kabir Bagai
 
   Given the following students exist:
   | name           | email               | email_old           | password  | bio      |
@@ -23,18 +23,24 @@ And the following courses exist:
   And the following groups exist:
   | group_id | course_id | group_owner_id |
   | 1        | 1         | 1              |
+  | 2        | 1         | 2              |
+
+  And the following group members exist:
+  | student_id | group_id |
+  | 1          | 1        |
+  | 2          | 2        |
+
+  And I am logged in with email "kb3343@columbia.edu" and password "123456789"
 
 
-  And I am logged in with email "yt2749@columbia.edu" and password "123456789"
-
-
-
-Scenario: send a join request
-  Given I am on the profile page for "Yuya Taniguchi"
+Scenario: send a merge group request
+  Given I am on the profile page for "Kabir Bagai"
   When  I follow "AP" 
   Then  I should be on the course page for "AP"
-  When  I follow class group link "1"
-  Then  I should be on the group page for "1"
-  And   I should see "Owner" before "Kabir"
-  When  I follow "Request to Join Group"
-  Then  I should see "Requested to Join"
+  When  I follow class group link "2"
+  Then  I should be on the group page for "2"
+  When  I follow "Request to Merge Groups"
+  Then  I should see "Cancel Merge Request"
+  And   I should see "Requested to Join"
+
+  
