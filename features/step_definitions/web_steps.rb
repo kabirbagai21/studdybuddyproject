@@ -58,7 +58,17 @@ When /^(?:|I )follow "([^"]*)"$/ do |link|
 end
 
 When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
-  fill_in(field, :with => value)
+  if field == "Course ID"
+    course = Course.find_by(name: value)
+    if course != nil
+      join_code = course.course_id
+      fill_in(field, :with => join_code)
+    else
+      fill_in(field, :with => value)
+    end
+  else
+    fill_in(field, :with => value)
+  end
 end
 
 When /^(?:|I )fill in "([^"]*)" for "([^"]*)"$/ do |value, field|
