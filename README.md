@@ -18,11 +18,26 @@ The application is live at: [StudyBuddy on Heroku](https://quiet-stream-84389-6a
 - Login and Signup page
 - Course Enrollment: Students can enroll in courses relevant to their studies using a course code (for example use 4152 or 3157).
 - Student Profile: Students can create and edit a profile with relevant info
+- Instructor Profile: Instructors can sign up (by clicking the instructor checkbox) and create a profile
+- Course Creation: Instructors can create a new course and set the course parameters. Creating a course will generate a join code that students can use to join the class.
 - Course Page: Students can view the groups in the course as well as the groups they are in
 - Create/Join Group: Students can create new group and request to join
 - Approve Requests: Group Owners can approve requests for students to join their group
+- Merge groups: A group can request to join with another group. The group receiving the request can accept/reject the request. 
 - Leave/Delete group
 - Updated UI
+
+## Using the app
+- Signup: Fill in the necessary fields on the signup page. If you are an instructor check the "Are you an instructor box.
+- Course creation: When signed in as an instructor, click the "Create New Course" button and fill in fields. Once the course is created, the instructor can also edit the fields by clicking the "Edit Course" button on the course page.
+- Join Code: On the instructor's profile page, make note of the join code for the class you just created. Copy the code to the clipboard
+- Joining a course: When signed in as a student, paste the join code into the "Join Course" textbox. Doing so will enroll the student in a course
+- Creating a group: When logged in as a student, click the "Create new group" button on the course page. You can leave or delete the group as well.
+- Public profiles: Click on the student's name in the group to view their public profile. 
+- Requesting to join a group: Click on the group you wish to join and click "Request to join". You can cancel the join request as well. You cannot request to join a group if it is full or if you are already in a group.
+- Approving a join request: If you are a member of a group, you can see and approve all join requests for your group. 
+- Merge requests: Follow the same process for approving/denying as join requests. Once a merge request is approved, all students from the requesting group will be added to the requested group.
+
 
 ## Getting Started
 
