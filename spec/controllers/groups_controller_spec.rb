@@ -5,8 +5,7 @@ RSpec.describe GroupsController, type: :controller do
 
   let(:student) { FactoryBot.create(:student) }
   let(:other_student) { FactoryBot.create(:student) }
-  let(:group) { FactoryBot.create(:group, group_owner_id: student.id, students: [student]) }
-  let(:course) { group.course }
+  let(:course) { FactoryBot.create(:course) } 
 
   before do
     sign_in student
@@ -14,6 +13,7 @@ RSpec.describe GroupsController, type: :controller do
 
   describe 'GET #show' do
     it 'assigns the requested group and its details' do
+      group = FactoryBot.create(:group, group_owner_id: student.id, students: [student], course: course)
       get :show, params: { id: group.id }
       expect(assigns(:group)).to eq(group)
       expect(assigns(:course)).to eq(group.course)
@@ -39,58 +39,67 @@ RSpec.describe GroupsController, type: :controller do
         FactoryBot.create(:group, course: course, students: [student])
         post :new, params: { course_id: course.id }
         expect(response).to redirect_to(course_path(course))
-        expect(flash[:alert]).to eq("You cannot create more than one group in a course.")
+        expect(flash[:alert]).to eq("You are already in a group. Please leave the group you are in to create a new one.")
       end
     end
 
     context 'when the student has requested to join another group in the course' do
-      it 'does not allow creating a new group and redirects' do
+      before do
         other_group = FactoryBot.create(:group, course: course)
         FactoryBot.create(:group_request, student: student, group: other_group)
         post :new, params: { course_id: course.id }
+      end
+
+      it 'does not allow creating a new group and redirects' do
         expect(response).to redirect_to(course_path(course))
-        expect(flash[:alert]).to eq("You cannot create more than one group in a course.")
+        expect(flash[:alert]).to eq("You cannot create a group if you have requested to join another group in this course")
       end
     end
   end
 
   describe 'PATCH #leave' do
-    context 'when a student leaves a group' do
-      it 'removes the student from the group and redirects' do
-        group.students << student
+    context 'when the group owner leaves and is the sole member' do
+      it 'deletes the group' do
+        group = FactoryBot.create(:group, group_owner_id: student.id, students: [student], course: course)
         patch :leave, params: { id: group.id }
-        expect(response).to redirect_to(course_path(group.course))
-
-        if Group.exists?(group.id)
-          expect(group.reload.students).not_to include(student)
-        else
-          expect(Group.exists?(group.id)).to be_falsey
-        end
+        expect(Group.exists?(group.id)).to be_falsey
+        expect(response).to redirect_to(course_path(course))
       end
     end
 
-    context 'when the group owner leaves' do
-      it 'assigns a new group owner or deletes the group' do
-        group.students << other_student
+    context 'when the group owner leaves but other students are present' do
+      it 'does not delete the group' do
+        group = FactoryBot.create(:group, group_owner_id: student.id, students: [student, other_student], course: course)
         patch :leave, params: { id: group.id }
-        group.reload
-        if group.students.empty?
-          expect(Group.exists?(group.id)).to be_falsey
-          expect(response).to redirect_to(course_path(course))
-        else
-          expect(group.group_owner_id).to eq(other_student.id)
-          expect(response).to redirect_to(group_path(group))
-        end
+        expect(Group.exists?(group.id)).to be_truthy
+        expect(response).to redirect_to(group_path(group))
+      end
+    end
+
+    context 'when a non-owner student leaves the group' do
+      it 'does not delete the group' do
+        group = FactoryBot.create(:group, group_owner_id: other_student.id, students: [student, other_student], course: course)
+        patch :leave, params: { id: group.id }
+        expect(Group.exists?(group.id)).to be_truthy
+        expect(response).to redirect_to(group_path(group))
       end
     end
   end
 
   describe 'DELETE #destroy' do
-    it 'deletes the group and redirects' do
+    it 'deletes the group, recalibrates sequential IDs, and redirects' do
+      group = FactoryBot.create(:group, course: course, sequential_id: 1)
+      additional_group_1 = FactoryBot.create(:group, course: course, sequential_id: 2)
+      additional_group_2 = FactoryBot.create(:group, course: course, sequential_id: 3)
+
       delete :destroy, params: { id: group.id }
-      expect(response).to redirect_to(course_path(course))
+
       expect(Group.exists?(group.id)).to be_falsey
+      expect(additional_group_1.reload.sequential_id).to eq(1) 
+      expect(additional_group_2.reload.sequential_id).to eq(1)
+      expect(response).to redirect_to(course_path(course))
     end
   end
+end
 
 end
