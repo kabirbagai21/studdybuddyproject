@@ -1,7 +1,7 @@
-Feature: join a study group
+Feature: accept merge group request
 
   As a student
-  I want to join a study/project group
+  I want to accept a merge group request
 
 
 Background: students in database and logged in as Yuya Taniguchi
@@ -23,18 +23,27 @@ And the following courses exist:
   And the following groups exist:
   | group_id | course_id | group_owner_id |
   | 1        | 1         | 1              |
+  | 2        | 1         | 2              |
 
+  And the following group members exist:
+  | student_id | group_id |
+  | 1          | 1        |
+  | 2          | 2        |
+
+  And the following merge group requests exist:
+  | group_requesting_id | group_to_merge_id | course_id |
+  | 1                   | 2                 | 1         |
 
   And I am logged in with email "yt2749@columbia.edu" and password "123456789"
 
 
-
-Scenario: send a join request
+Scenario: accept a merge group request
   Given I am on the profile page for "Yuya Taniguchi"
   When  I follow "AP" 
   Then  I should be on the course page for "AP"
-  When  I follow class group link "1"
-  Then  I should be on the group page for "1"
-  And   I should see "Owner" before "Kabir"
-  When  I follow "Request to Join Group"
-  Then  I should see "Requested to Join"
+  When  I follow my group link "2"
+  Then  I should be on the group page for "2"
+  And   I should see "Request from 1: Kabir"
+  When  I press "Approve Merge Request"
+  Then  I should see "Group: 1"
+  And   I should see "Enrollment: 2/4"

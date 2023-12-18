@@ -7,13 +7,13 @@ Given /the following students exist/ do |students_table|
   students_table.hashes.each do |student|
       # each returned element will be a hash whose key is the table header.
       # you should arrange to add that movie to the database here.
-    Student.create(name: student[:name], email: student[:email], email_old: student[:email_old], password: student[:password], bio: student[:bio])
+    Student.create(name: student[:name], email: student[:email], email_old: student[:email_old], password: student[:password], bio: student[:bio], instructor: student[:instructor])
   end
 end
 
 And /the following courses exist/ do |courses_table|
   courses_table.hashes.each do |course|
-    Course.create(name: course[:name], course_id: course[:course_id])
+    Course.create(name: course[:name], course_id: course[:course_id], course_code: course[:course_code], max_group_size: course[:max_group_size], semester: course[:semester], year: course[:year], instructor_id: course[:instructor_id])
   end
 end
 
@@ -29,9 +29,21 @@ And /the following groups exist/ do |groups_table|
   end
 end
 
+And /the following group members exist/ do |group_members_table|
+  group_members_table.hashes.each do |member|
+    GroupMember.create(group_id: member[:group_id], student_id: member[:student_id])
+  end
+end
+
 And /the following group requests exist/ do |group_requests_table|
   group_requests_table.hashes.each do |group_request|
     GroupRequest.create(student_id: group_request[:student_id].to_i, course_id: group_request[:course_id].to_i, group_id: group_request[:group_id].to_i)
+  end
+end
+
+And /the following merge group requests exist/ do |merge_group_requests_table|
+  merge_group_requests_table.hashes.each do |merge_group_request|
+    MergeGroupRequest.create(group_requesting_id: merge_group_request[:group_requesting_id].to_i, group_to_merge_id: merge_group_request[:group_to_merge_id].to_i, course_id: merge_group_request[:course_id].to_i)
   end
 end
   
@@ -43,6 +55,18 @@ Then /(.*) seed groups should exist/ do | n_seeds |
   expect(Group.count).to eq n_seeds.to_i
 end
 
+Then /(.*) seed courses should exist/ do | n_seeds |
+  expect(Course.count).to eq n_seeds.to_i
+end
+
+Then /(.*) seed enrollments should exist/ do | n_seeds |
+  expect(Enrollment.count).to eq n_seeds.to_i
+end
+
+Then /(.*) seed group requests should exist/ do | n_seeds |
+  expect(GroupRequest.count).to eq n_seeds.to_i
+end
+
 
 And /I am logged in with email "(.+)" and password "(.+)"/ do |email, password|
   visit '/'
@@ -52,9 +76,10 @@ And /I am logged in with email "(.+)" and password "(.+)"/ do |email, password|
 end
 
 
-And /I am enrolled in "(.+)"/ do |course|
+And /I am enrolled in "(.+)"/ do |course_name|
+  course = Course.find_by(name: course_name)
   visit '/'
-  fill_in "Course ID", with: course
+  fill_in "Course ID", with: course.course_id
   click_button "Join"
 end
   
@@ -103,6 +128,10 @@ When /I follow class group link "(.+)"/ do |group_id|
   end
 end
 
+When /I follow course link "(.+)"/ do |course_name|
+  course = Course.find_by(name: course_name)
+  visit course_path(course)
+end
   
   ### Utility Steps Just for this assignment.
   
